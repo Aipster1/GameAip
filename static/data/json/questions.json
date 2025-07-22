@@ -1,0 +1,254 @@
+{
+  "quiz": [
+    {
+      "id": 1,
+      "frage": "Wie heißt die Hauptstadt von Deutschland?",
+      "antwort": "Berlin"
+    },
+    {
+      "id": 2,
+      "frage": "Welcher Planet ist der vierte von der Sonne aus?",
+      "antwort": "Mars"
+    },
+    {
+      "id": 3,
+      "frage": "In welchem Jahr begann der Zweite Weltkrieg?",
+      "antwort": "1939"
+    },
+    {
+      "id": 4,
+      "frage": "Wer schrieb 'Faust'?",
+      "antwort": "Johann Wolfgang von Goethe"
+    },
+    {
+      "id": 5,
+      "frage": "Wie viele Bundesländer hat Deutschland?",
+      "antwort": "16"
+    },
+    {
+      "id": 6,
+      "frage": "Welches Element hat das chemische Symbol 'O'?",
+      "antwort": "Sauerstoff"
+    },
+    {
+      "id": 7,
+      "frage": "Wie viele Kontinente gibt es?",
+      "antwort": "7"
+    },
+    {
+      "id": 8,
+      "frage": "Was ist die kleinste Einheit des Lebens?",
+      "antwort": "Zelle"
+    },
+    {
+      "id": 9,
+      "frage": "Wer malte die Mona Lisa?",
+      "antwort": "Leonardo da Vinci"
+    },
+    {
+      "id": 10,
+      "frage": "Welches Land hat die größte Bevölkerung?",
+      "antwort": "China"
+    },
+    {
+      "id": 11,
+      "frage": "Wie viele Tage hat ein Schaltjahr?",
+      "antwort": "366"
+    },
+    {
+      "id": 12,
+      "frage": "Was ist das Symbol für Gold im Periodensystem?",
+      "antwort": "Au"
+    },
+    {
+      "id": 13,
+      "frage": "Wer entdeckte Amerika?",
+      "antwort": "Christoph Kolumbus"
+    },
+    {
+      "id": 14,
+      "frage": "Wie viele Planeten hat unser Sonnensystem?",
+      "antwort": "8"
+    },
+    {
+      "id": 15,
+      "frage": "Was ist die Hauptstadt von Frankreich?",
+      "antwort": "Paris"
+    },
+    {
+      "id": 16,
+      "frage": "Wie viele Zähne hat ein erwachsener Mensch normalerweise?",
+      "antwort": "32"
+    },
+    {
+      "id": 17,
+      "frage": "Welches Gas atmen wir hauptsächlich ein?",
+      "antwort": "Sauerstoff"
+    },
+    {
+      "id": 18,
+      "frage": "Wer schrieb die Harry-Potter-Bücher?",
+      "antwort": "J.K. Rowling"
+    },
+    {
+      "id": 19,
+      "frage": "Wie heißt der längste Fluss der Welt?",
+      "antwort": "Nil"
+    },
+    {
+      "id": 20,
+      "frage": "Was ist der größte Ozean der Erde?",
+      "antwort": "Pazifischer Ozean"
+    },
+    {
+      "id": 21,
+      "frage": "Wie viele Farben hat ein Regenbogen?",
+      "antwort": "7"
+    },
+    {
+      "id": 22,
+      "frage": "Wer war der erste Mensch auf dem Mond?",
+      "antwort": "Neil Armstrong"
+    },
+    {
+      "id": 23,
+      "frage": "Was ist die Währung in Japan?",
+      "antwort": "Yen"
+    },
+    {
+      "id": 24,
+      "frage": "Welcher Vogel kann nicht fliegen?",
+      "antwort": "Pinguin"
+    },
+    {
+      "id": 25,
+      "frage": "Wie viele Minuten hat eine Stunde?",
+      "antwort": "60"
+    },
+    {
+      "id": 26,
+      "frage": "Was ist die chemische Formel von Wasser?",
+      "antwort": "H2O"
+    },
+    {
+      "id": 27,
+      "frage": "Welches Land ist bekannt für die Pyramiden?",
+      "antwort": "Ägypten"
+    },
+    {
+      "id": 28,
+      "frage": "Wie heißt der höchste Berg der Welt?",
+      "antwort": "Mount Everest"
+    },
+    {
+      "id": 29,
+      "frage": "Welches Tier ist das größte Landtier?",
+      "antwort": "Elefant"
+    },
+    {
+      "id": 30,
+      "frage": "Wie viele Spieler hat eine Fußballmannschaft auf dem Feld?",
+      "antwort": "11"
+    },
+    {
+      "id": 31,
+      "frage": "Was ist die Hauptstadt von Italien?",
+      "antwort": "Rom"
+    },
+    {
+      "id": 32,
+      "frage": "Welches Land hat den Eiffelturm?",
+      "antwort": "Frankreich"
+    },
+    {
+      "id": 33,
+      "frage": "Wie viele Stunden hat ein Tag?",
+      "antwort": "24"
+    },
+    {
+      "id": 34,
+      "frage": "Wer komponierte die 9. Sinfonie?",
+      "antwort": "Ludwig van Beethoven"
+    },
+    {
+      "id": 35,
+      "frage": "Wie heißt das Symbol für Silber im Periodensystem?",
+      "antwort": "Ag"
+    },
+    {
+      "id": 36,
+      "frage": "Was ist der größte Planet in unserem Sonnensystem?",
+      "antwort": "Jupiter"
+    },
+    {
+      "id": 37,
+      "frage": "Wie viele Bundesstaaten hat die USA?",
+      "antwort": "50"
+    },
+    {
+      "id": 38,
+      "frage": "Was ist das Nationaltier Deutschlands?",
+      "antwort": "Bundesadler"
+    },
+    {
+      "id": 39,
+      "frage": "Wie viele Zylinder hat ein typischer V6-Motor?",
+      "antwort": "6"
+    },
+    {
+      "id": 40,
+      "frage": "Wer erfand das Telefon?",
+      "antwort": "Alexander Graham Bell"
+    },
+    {
+      "id": 41,
+      "frage": "Was ist die Hauptstadt von Australien?",
+      "antwort": "Canberra"
+    },
+    {
+      "id": 42,
+      "frage": "Welches Tier ist das schnellste an Land?",
+      "antwort": "Gepard"
+    },
+    {
+      "id": 43,
+      "frage": "Wie viele Planeten sind Gasriesen?",
+      "antwort": "4"
+    },
+    {
+      "id": 44,
+      "frage": "Wer schrieb 'Die Verwandlung'?",
+      "antwort": "Franz Kafka"
+    },
+    {
+      "id": 45,
+      "frage": "Wie viele Kontinente gibt es auf der Erde?",
+      "antwort": "7"
+    },
+    {
+      "id": 46,
+      "frage": "Was ist die Hauptsprache in Brasilien?",
+      "antwort": "Portugiesisch"
+    },
+    {
+      "id": 47,
+      "frage": "Wie heißt die größte Insel der Welt?",
+      "antwort": "Grönland"
+    },
+    {
+      "id": 48,
+      "frage": "Wer war der erste Bundeskanzler Deutschlands?",
+      "antwort": "Konrad Adenauer"
+    },
+    {
+      "id": 49,
+      "frage": "Was ist das Symbol für Eisen im Periodensystem?",
+      "antwort": "Fe"
+    },
+    {
+      "id": 50,
+      "frage": "Wie viele Monate haben 31 Tage?",
+      "antwort": "7"
+    }
+  ]
+}

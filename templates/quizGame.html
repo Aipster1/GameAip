@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quizspiel - Game</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script type="module" src="{{ url_for('static', filename='quizLogic.js') }}" defer></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Quizspiel</h1>
+    <div id="game">
+        <p id="question">Frage: Was ist die Antwort auf alles?</p>
+        <input id="answer" placeholder="Antwort">
+        <button onclick="submitAnswer()">Abschicken</button>
+
+        <h3>Spieler:</h3>
+        <ul id="players"></ul>
+    </div>
+</body>
+</html>

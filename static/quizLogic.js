@@ -1,3 +1,5 @@
+//static/quizLogic.js
+
 import {socket, username} from './script.js';
 
 // Spielername aus localStorage holen (wurde zuvor in index.html gespeichert)
@@ -9,22 +11,24 @@ socket.emit('register', {username: name});
 console.log(username);
 console.log(name);
 
-function setFirstQuestion(){
-
-    fetch('/static/data/json/questions.json')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("question").textContent = data.question; //ID fehlt noch
-        })
-        .catch(error => {
-            console.error('Fehler beim Laden der JSON-Datei:', error);
-        });
-
+function changeQuestion(questionCounter) {
+    socket.emit('getQuestion', {questionCounter: questionCounter});
 }
+
+socket.on('nextQuestion', (data) => {
+    if (data.error) {
+        console.error("Fehler vom Server:", data.error);
+        return;
+    }
+
+    document.getElementById("question").textContent = data.frage;
+    console.log(`Frage ${data.id}: ${data.frage}`);
+});
+
 
 function submitAnswer() {
 
-    console.log("Hallo Welt du Hurensohn");
+    console.log("Hallo Welt");
 
     // Holt den eingegebenen Antworttext
     const userAnswer = document.getElementById("answer").value;
@@ -37,11 +41,8 @@ function submitAnswer() {
     document.getElementById("answer").value = "";
 }
 
-
-// Reagiert auf das "player_list"-Event vom Server
-// Dieses Event enthält eine Liste aller Spieler mit ihren Punkten
-
 socket.on('updateScore', (data) => {
+
     console.log('Empfangene Daten:', data);
 
     const list = document.getElementById("players");
@@ -58,7 +59,7 @@ socket.on('updateScore', (data) => {
         console.log("Keine Spieler-Daten empfangen");
     }
 
-       if (data.questionCounter !== undefined) {
+    if (data.questionCounter !== undefined) {
         console.log("Aktueller Fragezähler:", data.questionCounter);
         changeQuestion(data.questionCounter)
     } else {
@@ -67,16 +68,28 @@ socket.on('updateScore', (data) => {
 
 });
 
-function changeQuestion(questionCounter) {
-    fetch('/static/data/json/questions.json')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("question").textContent = data.question; //ID fehlt noch
-        })
-        .catch(error => {
-            console.error('Fehler beim Laden der JSON-Datei:', error);
+
+socket.on('initPlayer', function (players) {
+    console.log("Aktuelle Spieler:", players);
+
+    const list = document.getElementById("players");
+    list.innerHTML = "";
+
+    if (players && players.length > 0) {
+        players.forEach(p => {
+            const li = document.createElement("li");
+            li.textContent = `${p.username}: ${p.Score} Punkte`;
+            list.appendChild(li);
         });
-}
+    } else {
+        console.log("Keine Spieler-Daten empfangen");
+    }
+});
+
 
 window.submitAnswer = submitAnswer;
 
+window.addEventListener('load', () => {
+    socket.emit('initPlayerList', {});
+    changeQuestion(1);
+});

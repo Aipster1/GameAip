@@ -1,0 +1,175 @@
+<!-- templates/keywords.html -->
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/keywordStyle.css') }}">
+    <script type="module" src="{{ url_for('static', filename='keywordLogic.js') }}" defer></script>
+    <meta charset="UTF-8">
+    <title>Wörterspiel</title>
+</head>
+<body>
+
+<div id="word-popup" class="popup">
+    <div class="popup-content">
+        <h2>Wähle ein Wort</h2>
+        <div class="options">
+            <button class="word-option">Apfel</button>
+            <button class="word-option">Auto</button>
+            <button class="word-option">Alpaka</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="game">
+    <div class="player-column">
+        <div class="header">Du<br>Punkte</div>
+
+        <div class="word-row"><span class="letter">A</span><span class="word" id="word-A">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">B</span><span class="word" id="word-B">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">C</span><span class="word" id="word-C">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">D</span><span class="word" id="word-D">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">E</span><span class="word" id="word-E">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">F</span><span class="word" id="word-F">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">G</span><span class="word" id="word-G">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">H</span><span class="word" id="word-H">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">I</span><span class="word" id="word-I">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">J</span><span class="word" id="word-J">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">K</span><span class="word" id="word-K">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">L</span><span class="word" id="word-L">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">M</span><span class="word" id="word-M">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">N</span><span class="word" id="word-N">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">O</span><span class="word" id="word-O">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">P</span><span class="word" id="word-P">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">Q</span><span class="word" id="word-Q">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">R</span><span class="word" id="word-R">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">S</span><span class="word" id="word-S">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">T</span><span class="word" id="word-T">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">U</span><span class="word" id="word-U">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">V</span><span class="word" id="word-V">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">W</span><span class="word" id="word-W">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">X</span><span class="word" id="word-X">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">Y</span><span class="word" id="word-Y">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+        <div class="word-row"><span class="letter">Z</span><span class="word" id="word-Z">...</span>
+            <div class="buttons"><span class="accept"></span><span class="reject"></span></div>
+        </div>
+
+
+        <button class="ready-button">Ready</button>
+    </div>
+
+    <div class="player-column">
+        <div class="header">Name<br>Punkte</div>
+        <div class="word-row"><span class="letter">A</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">B</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">C</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">D</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">E</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">F</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">G</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">H</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">I</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">J</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">K</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">L</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">M</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">N</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">O</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">P</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">Q</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">R</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">S</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">T</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">U</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">V</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">W</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">X</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">Y</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">Z</span><span class="word"></span></div>
+    </div>
+
+    <div class="player-column">
+        <div class="header">Name<br>Punkte</div>
+        <div class="word-row"><span class="letter">A</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">B</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">C</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">D</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">E</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">F</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">G</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">H</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">I</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">J</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">K</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">L</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">M</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">N</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">O</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">P</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">Q</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">R</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">S</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">T</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">U</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">V</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">W</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">X</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">Y</span><span class="word"></span></div>
+        <div class="word-row"><span class="letter">Z</span><span class="word"></span></div>
+    </div>
+</div>
+
+<script src="D:\Programmierung\Projects\GameAip\static\keywordLogic.js"></script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 export const socket = io(); // Nur das hier
 
 export let username = null;
+
 // Funktion wird aufgerufen, wenn der Benutzer auf „Mitspielen“ klickt
 function register() {
     // Holt den eingegebenen Namen aus dem Eingabefeld
@@ -10,8 +11,8 @@ function register() {
     localStorage.setItem('username', username); // ← speichert dauerhaft
 
     window.username = username;
-    window.location.href = '/quizGame';
-    socket.emit('register', { username });
+    window.location.href = '/keywords';
+    socket.emit('register', {username});
 }
 
 window.register = register;

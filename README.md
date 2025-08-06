@@ -1,4 +1,4 @@
 Hi Pascal!
 
-## Weitere Dateien
+## Projekt Ideen und ToDos
 - [Projekt-Ideen](./ideas.md)

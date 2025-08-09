@@ -56,4 +56,4 @@ if __name__ == '__main__':
     print(f"Fragen geladen:    {len(questions['quiz'])}")
     print("=================================\n")
 
-    socketio.run(app, host=host, port=port)
+    socketio.run(app, host=host, port=port, debug=True)

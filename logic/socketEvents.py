@@ -10,6 +10,7 @@ def socketLogicEvents(socketio, connectedIpAddresses, currentPlayer):
         user_agent = request.headers.get('User-Agent')
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+        # brauchen wir den user_agent wirklich?
         if ip_address not in connectedIpAddresses:
             connectedIpAddresses[ip_address] = {
                 'ip': ip_address,
@@ -38,6 +39,7 @@ def socketLogicEvents(socketio, connectedIpAddresses, currentPlayer):
             emit('player_list', list(currentPlayer.values()), broadcast=True)
             return
 
+        
         playerData = {
             'username': name,
             'ip': ip_address,

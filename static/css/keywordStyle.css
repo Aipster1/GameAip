@@ -10,6 +10,10 @@ body {
     display: flex;
     gap: 20px;
 }
+.game {
+    display: flex;
+    gap: 20px;
+}
 
 .player-column {
     border: 2px solid #444;
@@ -18,7 +22,20 @@ body {
     background-color: #1e1e1e;
     border-radius: 6px;
 }
+.player-column {
+    border: 2px solid #444;
+    padding: 10px;
+    min-width: 200px;
+    background-color: #1e1e1e;
+    border-radius: 6px;
+}
 
+.header {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
 .header {
     font-weight: bold;
     text-align: center;
@@ -36,7 +53,21 @@ body {
     background-color: #2a2a2a;
     border-radius: 4px;
 }
+.word-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #333;
+    padding: 4px;
+    margin-bottom: 2px;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+}
 
+.letter {
+    width: 20px;
+    color: #ffcc66;
+}
 .letter {
     width: 20px;
     color: #ffcc66;
@@ -47,7 +78,16 @@ body {
     padding-left: 5px;
     color: #e0e0e0;
 }
+.word {
+    flex: 1;
+    padding-left: 5px;
+    color: #e0e0e0;
+}
 
+.buttons {
+    display: flex;
+    gap: 4px;
+}
 .buttons {
     display: flex;
     gap: 4px;
@@ -59,7 +99,16 @@ body {
     cursor: pointer;
     border-radius: 3px;
 }
+.accept, .reject {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    border-radius: 3px;
+}
 
+.accept {
+    background-color: #4caf50;
+}
 .accept {
     background-color: #4caf50;
 }
@@ -67,7 +116,25 @@ body {
 .reject {
     background-color: #f44336;
 }
+.reject {
+    background-color: #f44336;
+}
 
+.ready-button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 8px;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.ready-button:hover {
+    background-color: #444;
+}
 .ready-button {
     margin-top: 20px;
     width: 100%;
@@ -101,7 +168,18 @@ body {
 .popup.hidden {
     display: none;
 }
+.popup.hidden {
+    display: none;
+}
 
+.popup-content {
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #ffffff;
+    border: 1px solid #444;
+}
 .popup-content {
     background: #1f1f1f;
     padding: 20px;
@@ -125,6 +203,10 @@ body {
     border: 1px solid #555;
     border-radius: 4px;
     transition: background-color 0.2s;
+}
+
+.word-option:hover {
+    background-color: #444;
 }
 
 .word-option:hover {

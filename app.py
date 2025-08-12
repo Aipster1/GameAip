@@ -23,6 +23,10 @@ def index():
     print("[ROUTE] Aufgerufen: / (index)")
     return render_template('index.html')
 
+@app.rout('/lobby')
+def lobby():
+    print("[ROUTE] Aufgerufen: / (lobby)")
+    return render_template('lobby.html')
 
 @app.route('/quizGame')
 def game():

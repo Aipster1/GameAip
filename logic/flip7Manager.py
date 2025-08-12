@@ -34,9 +34,18 @@ def build_deck():
     return deck
 
 
-def draw_card(card_count):
-    #draw card
-    pass
+def draw_card(num_cards, deck):
+    drawn_cards = deck[0:num_cards]
+
+    for card in drawn_cards:
+        remove_card_from_deck(card, deck)
+
+    return drawn_cards
+
+
+def remove_card_from_deck(card, deck):
+    deck.remove(card)
+    print("removed card:", card)
 
 
 def player_bust(player):
@@ -44,16 +53,23 @@ def player_bust(player):
     pass
 
 
-
 discard_pile = []
 
 
 deck = build_deck()
-
-
+print(len(deck))
 random.shuffle(deck)
 
-print(deck)
+
+print("deck", deck)
+
+hand = draw_card(1, deck)
+
+print(len(deck))
+
+print("deck", deck)
+
+print("hand", hand)
 
 
 

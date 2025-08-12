@@ -24,6 +24,10 @@ def index():
     print("[ROUTE] Aufgerufen: / (index)")
     return render_template('index.html')
 
+@app.rout('/lobby')
+def lobby():
+    print("[ROUTE] Aufgerufen: / (lobby)")
+    return render_template('lobby.html')
 
 @app.route('/quizGame')
 def game():
@@ -39,6 +43,7 @@ def keywords():
 def keywords():
     print("[ROUTE] Aufgerufen: /flip7")
     return render_template('flip7.html')
+
 
 def getLocalIp():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

@@ -107,3 +107,27 @@ Game
    
 - spieler 2
 - spieler 3
+
+
+
+
+3 Games
+
+Verbindung
+
+Registrierung
+
+lobby
+  - Übersicht mit allen Spielen
+
+Spiel anklicken
+  - Spiel erstellen oder beitreten
+
+
+
+
+
+
+
+# flip7:
+

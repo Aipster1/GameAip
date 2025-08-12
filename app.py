@@ -35,6 +35,11 @@ def keywords():
     print("[ROUTE] Aufgerufen: /keywords")
     return render_template('keywords.html')
 
+@app.route('/flip7')
+def keywords():
+    print("[ROUTE] Aufgerufen: /flip7")
+    return render_template('flip7.html')
+
 def getLocalIp():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:

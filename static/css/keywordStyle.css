@@ -1,103 +1,132 @@
-/*static/css/keywordStyle.css*/
-
 body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #121212;
+    color: #e0e0e0;
+}
 
-        .game {
-            display: flex;
-            gap: 20px;
-        }
+.game {
+    display: flex;
+    gap: 20px;
+}
 
-        .player-column {
-            border: 2px solid black;
-            padding: 10px;
-            min-width: 200px;
-        }
+.player-column {
+    border: 2px solid #444;
+    padding: 10px;
+    min-width: 200px;
+    background-color: #1e1e1e;
+    border-radius: 6px;
+}
 
-        .header {
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
-        }
+.header {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
 
-        .word-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #000;
-            padding: 4px;
-            margin-bottom: 2px;
-        }
+.word-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #333;
+    padding: 4px;
+    margin-bottom: 2px;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+}
 
-        .letter {
-            width: 20px;
-        }
+.letter {
+    width: 20px;
+    color: #ffcc66;
+}
 
-        .word {
-            flex: 1;
-            padding-left: 5px;
-        }
+.word {
+    flex: 1;
+    padding-left: 5px;
+    color: #e0e0e0;
+}
 
-        .buttons {
-            display: flex;
-            gap: 4px;
-        }
+.buttons {
+    display: flex;
+    gap: 4px;
+}
 
-        .accept, .reject {
-            width: 14px;
-            height: 14px;
-            cursor: pointer;
-        }
+.accept, .reject {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    border-radius: 3px;
+}
 
-        .accept {
-            background-color: green;
-        }
+.accept {
+    background-color: #4caf50;
+}
 
-        .reject {
-            background-color: red;
-        }
+.reject {
+    background-color: #f44336;
+}
 
-        .ready-button {
-            margin-top: 20px;
-            width: 100%;
-            padding: 8px;
-        }
+.ready-button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 8px;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
 
-        /* Popup-Styling */
-        .popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-        }
+.ready-button:hover {
+    background-color: #444;
+}
 
-        .popup.hidden {
-            display: none;
-        }
+/* Popup-Styling */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
 
-        .popup-content {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
+.popup.hidden {
+    display: none;
+}
 
-        .options {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
+.popup-content {
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #ffffff;
+    border: 1px solid #444;
+}
 
-        .word-option {
-            padding: 10px 20px;
-            cursor: pointer;
-        }
+.options {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.word-option {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.word-option:hover {
+    background-color: #444;
+}

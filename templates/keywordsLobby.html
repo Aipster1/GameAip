@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+    <link rel="stylesheet" href="/static/css/gameLobby.css">
+</head>
+<body>
+    <h1 class="header">keywords</h1>
+
+    <div class="lobby-container">
+        <!-- Hosten Button -->
+        <div class="host-box">
+            <button class="ready-button">Hosten</button>
+        </div>
+
+        <!-- Lobby Liste -->
+        <div class="lobby-list">
+            <div class="lobby-row">
+                <span class="lobby-name">LobbyName1</span>
+                <span class="lobby-players">5/9</span>
+            </div>
+            <div class="lobby-row">
+                <span class="lobby-name">LobbyName2</span>
+                <span class="lobby-players">2/10</span>
+            </div>
+            <div class="lobby-row empty"></div>
+            <div class="lobby-row empty"></div>
+
+            <button class="ready-button">Beitreten</button>
+        </div>
+    </div>
+
+    <!-- Zurück Button -->
+
+
+<a href="{{ url_for('lobby') }}">
+            <div class="back-container">
+        <button class="back-button">Zurück</button>
+    </div>
+    </a>
+</body>
+</html>

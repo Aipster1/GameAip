@@ -1,6 +1,6 @@
 //static/quizLogic.js
 
-import {socket, username} from './script.js';
+import {socket, username} from './lobby.js';
 
 // Spielername aus localStorage holen (wurde zuvor in index.html gespeichert)
 const name = localStorage.getItem('username');

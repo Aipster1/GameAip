@@ -4,6 +4,7 @@ from flask_socketio import SocketIO, emit
 
 from logic.quizgameManager import loadQuizJSON, quizLogicEvents
 from logic.socketEvents import socketLogicEvents
+from logic.lobby import lobbysInit, flip_7_lobby
 
 app = Flask(__name__, static_url_path='/static')
 app.secret_key = 'aipsterKeyWuh'
@@ -17,6 +18,8 @@ socketio = SocketIO(app, ping_interval=60, ping_timeout=600)
 
 socketLogicEvents(socketio, connectedIpAddresses)
 quizLogicEvents(socketio, questionCounter)
+lobbysInit(socketio)
+
 
 @app.route('/')
 def index():
@@ -51,6 +54,9 @@ def quizGameLobby():
 @app.route('/lobby/flipSevenLobby')
 def flipSevenLobby():
     print("[ROUTE] Aufgerufen: /lobby/flipSevenLobby")
+
+    flip_7_lobby["blub"] = "blub"
+
     return render_template('flipSevenLobby.html')
 
 @app.route('/lobby/flipSevenLobby/flipSevenInGame')

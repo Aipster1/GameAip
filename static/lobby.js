@@ -11,7 +11,7 @@ function register() {
     localStorage.setItem('username', username); // ← speichert dauerhaft
 
     window.username = username;
-    window.location.href = '/keywords';
+    window.location.href = '/lobby';
     socket.emit('register', {username});
 }
 

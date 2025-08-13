@@ -1,6 +1,4 @@
 from flask import request, session
-from flask_socketio import emit
-from datetime import datetime
 
 def socketLogicEvents(socketio, connectedIpAddresses):
     currentPlayers = {}
@@ -30,10 +28,8 @@ def socketLogicEvents(socketio, connectedIpAddresses):
         if lowerCaseName in currentPlayers and currentPlayers[lowerCaseName]["status"] == "disconnected":
             currentPlayers[lowerCaseName]["status"] = "connected"
             print(f"Spieler RECONNECTED: {name} (IP: {ip_address})")
-            emit('player_list', list(currentPlayers.values()), broadcast=True)
             return
 
-        
         playerData = {
             'username': name,
             'ip': ip_address,
@@ -43,12 +39,10 @@ def socketLogicEvents(socketio, connectedIpAddresses):
         currentPlayers[lowerCaseName] = playerData
         print(f"Neuer Spieler registriert: {name} (IP: {ip_address})")
 
-        # emit('updateScore', list(currentPlayers.values()), broadcast=True)
 
     @socketio.on('disconnect')
     def handleDisconnect():
         ipAddress = request.remote_addr
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         disconnectedUser = None
 
         for player in currentPlayers.values():
@@ -58,6 +52,6 @@ def socketLogicEvents(socketio, connectedIpAddresses):
                 break
 
         if disconnectedUser:
-            print(f"[{timestamp}] Spieler getrennt: {disconnectedUser} (IP: {ipAddress})")
+            print(f"Spieler getrennt: {disconnectedUser} (IP: {ipAddress})")
         else:
-            print(f"[{timestamp}] Verbindung getrennt (unregistrierte IP): {ipAddress}")
+            print(f"Verbindung getrennt (unregistrierte IP): {ipAddress}")

@@ -54,8 +54,28 @@ def flipSevenLobby():
     print("[ROUTE] Aufgerufen: /lobby/flipSevenLobby")
     return render_template('flipSevenLobby.html')
 
+@app.route('/lobby/flipSevenLobby/flipSevenInGame')
+def flipSevenLobbyIngame():
+    print("[ROUTE] Aufgerufen: /lobby/flipSevenLobby/flipSevenInGame")
 
+    # Beispiel: Kartenpfade relativ zu static/
+    # Einzelner Spieler:
+    player_cards = [
+        "css/assets/images/flipSevenCards/flipSevenTwo.png",
+        "css/assets/images/flipSevenCards/flipSevenFreeze.png",
+        "css/assets/images/flipSevenCards/flipSevenPlusTwo.png",
+        "css/assets/images/flipSevenCards/flipSevenEleven.png"
+    ]
 
+    # oder mehrere Spieler (4 Spieler)
+    players = {
+      "south": ["/css/assets/images/flipSevenCards/flipSevenTwo.png", "/css/assets/images/flipSevenCards/flipSevenFreeze.png", "/css/assets/images/flipSevenCards/flipSevenPlusTwo.png"],
+      "north": ["/css/assets/images/flipSevenCards/flipSevenEleven.png", "/css/assets/images/flipSevenCards/flipSevenThree.png"],
+      "left":  ["/css/assets/images/flipSevenCards/flipSevenOne.png", "/css/assets/images/flipSevenCards/flipSevenEleven.png"],
+      "right": ["/css/assets/images/flipSevenCards/flipSevenSeven.png", "/css/assets/images/flipSevenCards/flipSevenEleven.png", "/css/assets/images/flipSevenCards/flipSevenTwo.png"]
+    }
+
+    return render_template('flipSevenIngame.html',  player_cards=player_cards, players=players)
 
 def getLocalIp():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -64,7 +84,6 @@ def getLocalIp():
         return s.getsockname()[0]
     finally:
         s.close()
-
 
 if __name__ == '__main__':
     host = '0.0.0.0'

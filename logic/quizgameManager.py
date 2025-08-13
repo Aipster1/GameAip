@@ -16,7 +16,7 @@ def loadQuizJSON():
 
 import copy
 
-def quizLogicEvents(socketio, currentPlayer, questionCounter):
+def quizLogicEvents(socketio, questionCounter):
     questions = loadQuizJSON()
 
     @socketio.on('answer')

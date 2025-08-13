@@ -48,14 +48,41 @@ def remove_card_from_deck(card, deck):
     print("removed card:", card)
 
 
-def player_bust(player):
+def get_player_hand(player):
+    hand = game_data["players"][f"{player}"]["cards"]
+    return hand
 
+
+def clear_player_hand(player):
+    game_data["players"][f"{player}"]["cards"] = []
+
+
+def player_bust(player):
     
-    #add hand cards to discard_pile
-    pass
+    player_hand = get_player_hand(player)
+
+    discard_pile.append(player_hand)
+    
+    clear_player_hand(player)
+
 
 
 # initialize
+game_data = {
+    "round_count":0,
+    "players": {
+        "tim":{
+            "cards": [],
+            "points": 0,
+        },
+        "olaf":{
+            "cards": [],
+            "points": 0,
+        }
+    },
+    "current_player": "tim",
+}
+
 
 discard_pile = []
 
@@ -66,13 +93,16 @@ random.shuffle(deck)
 
 # game logic
 
-hand = draw_card(1, deck)
+hand = draw_card(3, deck)
 
+game_data["players"]["tim"]["cards"] = hand
 
+print("game_data: ", game_data)
 
+player_bust("tim")
 
+print(discard_pile)
 
-
-
+print("tims hand: ", game_data["players"]["tim"]["cards"])
 
 

@@ -51,6 +51,7 @@ def quizGameLobby():
     print("[ROUTE] Aufgerufen: /lobby/quizGameLobby")
     return render_template('quizGameLobby.html')
 
+#('/lobby/flip7/lobbyId)
 @app.route('/lobby/flipSevenLobby')
 def flipSevenLobby():
     print("[ROUTE] Aufgerufen: /lobby/flipSevenLobby")
@@ -58,7 +59,7 @@ def flipSevenLobby():
     flip_7_lobby["blub"] = "blub"
 
     return render_template('flipSevenLobby.html')
-
+#('/game/flip7/gameId)
 @app.route('/lobby/flipSevenLobby/flipSevenInGame')
 def flipSevenLobbyIngame():
     print("[ROUTE] Aufgerufen: /lobby/flipSevenLobby/flipSevenInGame")

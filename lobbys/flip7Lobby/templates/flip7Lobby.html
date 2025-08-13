@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+    
+    <link rel="stylesheet" href="{{ url_for('flip7LobbyBp.static', filename='css/flip7Lobby.css') }}">
+
+    
+</head>
+<body>
+    <h1 class="header">flipSeven</h1>
+
+    <div class="lobby-container">
+        <!-- Hosten Button -->
+        <div class="host-box">
+            <button class="ready-button">Hosten</button>
+        </div>
+
+        <!-- Lobby Liste -->
+        <div class="lobby-list">
+            <div class="lobby-row">
+                <span class="lobby-name">LobbyName1</span>
+                <span class="lobby-players">5/9</span>
+            </div>
+            <div class="lobby-row">
+                <span class="lobby-name">LobbyName2</span>
+                <span class="lobby-players">2/10</span>
+            </div>
+            <div class="lobby-row empty"></div>
+            <div class="lobby-row empty"></div>
+
+             <a href="/lobby/flipSevenLobby/flipSevenInGame"><button class="ready-button">Beitreten</button></a>
+        </div>
+    </div>
+
+   
+<a href="{{ url_for('mainLobbyBp.lobby') }}">
+            <div class="back-container">
+        <button class="back-button">Zurück</button>
+    </div>
+    </a>
+</body>
+</html>

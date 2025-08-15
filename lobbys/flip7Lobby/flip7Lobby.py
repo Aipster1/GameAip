@@ -1,4 +1,5 @@
-from flask import render_template, request, session, Blueprint
+from flask import render_template, Blueprint
+from lobbys.lobbyManager import lobbyStorage
 
 
 flip7LobbyBp = Blueprint('flip7LobbyBp', __name__,
@@ -8,8 +9,21 @@ flip7LobbyBp = Blueprint('flip7LobbyBp', __name__,
 
 
 @flip7LobbyBp.route('/lobby/flip7')
-def flip7Lobby():
+def flip7MainLobby():
     print("[ROUTE] Aufgerufen: /lobby/flip7")
 
-    return render_template('flip7Lobby.html')
+    # shows all existing lobbys
+    open_lobbies = lobbyStorage.list_open()
+    print("flip7 lobbies:", open_lobbies)
+
+    return render_template('flip7MainLobby.html', open_lobbies = open_lobbies)
+
+
+@flip7LobbyBp.route('/lobby/flip7/<int:id>', methods=['GET', 'POST'])
+def flip7GameLobby(id):
+    print("[ROUTE] Aufgerufen: /lobby/flip7")
+
+    # shows all existing lobbys
+
+    return render_template('flip7GameLobby.html')
 

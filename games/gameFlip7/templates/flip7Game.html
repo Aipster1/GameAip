@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <!-- Ansicht für verschiedene Geräte -->
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Kartenspiel - Fächer</title>
+
+   
+    <link rel="stylesheet" href="{{ url_for('gameFlip7Bp.static', filename='css/flip7Ingame.css') }}">
+    
+    <script type="module" src="{{ url_for('gameFlip7Bp.static', filename='js/flip7.js') }}"></script>
+</head>
+<body>
+<main class="table">
+    <!-- Container für eine Spielerhand (unten auf dem Bildschirm) -->
+    <section class="hand-container">
+        <!-- Das fächern wird in der flipSevenCard.js umgesetzt. Dafür können wir verschiedene Variablen setzen:
+            data-spread: Gesamtwinkel in Grad
+            data-spacing: horizontaler Abstand (px)
+            data-radius: wie stark Außenkarten angehoben werden (px)
+            data-orientation: bottom/top/left/right -> beeinflusst Drehpunkt & Basisrotation
+        -->
+        <div class="hand" data-spread="40" data-spacing="60" data-radius="22" data-orientation="bottom">
+            <!--
+              geht durch player_cards, welches in der app.py übergeben wurde und erstellt für jede Karte ein IMG
+              Müsste man anpassen für den richtigen Spielverlauf wo dann die Handkarten geladen werden
+            -->
+            {% for card in player_cards %}
+            <img class="card" src="{{ url_for('gameFlip7Bp.static', filename='assets/images/' ~ card.filename) }}" alt="Karte">
+            {% endfor %}
+
+        </div>
+    </section>
+
+
+
+    <!-- Mittige Stapel zum Ziehen und Ablegen -->
+    <section class="center-piles">
+        <!-- Ziehstapel: klickbar -->
+        <button id="draw-pile" title="Ziehstapel">
+            <img src="{{ url_for('gameFlip7Bp.static', filename='assets/images/flipSevenBackground.png') }}" alt="Ziehstapel">
+        </button>
+        <!-- Ablegestapel: nur Bild -->
+        <img id="discard-pile" src="{{ url_for('gameFlip7Bp.static', filename='assets/images/flipSevenAblage.png') }}" alt="Ablegestapel">
+    </section>
+
+    <!-- Button um Ansicht zu wechseln -->
+    <button class="toggle-view-btn">Ansicht wechseln</button>
+</main>
+
+    </body>
+</html>

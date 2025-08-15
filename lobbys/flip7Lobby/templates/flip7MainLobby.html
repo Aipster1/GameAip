@@ -10,7 +10,7 @@
     
 </head>
 <body>
-    <h1 class="header">flipSeven</h1>
+    <h1 class="header">flipSeven MainLobby</h1>
 
     <div class="lobby-container">
         <!-- Hosten Button -->
@@ -19,20 +19,16 @@
         </div>
 
         <!-- Lobby Liste -->
+         {% for lobby in open_lobbies %}
         <div class="lobby-list">
             <div class="lobby-row">
-                <span class="lobby-name">LobbyName1</span>
-                <span class="lobby-players">5/9</span>
+                <span class="lobby-name">{{ lobby.name }}</span>
             </div>
             <div class="lobby-row">
-                <span class="lobby-name">LobbyName2</span>
-                <span class="lobby-players">2/10</span>
-            </div>
-            <div class="lobby-row empty"></div>
-            <div class="lobby-row empty"></div>
 
              <a href="/lobby/flipSevenLobby/flipSevenInGame"><button class="ready-button">Beitreten</button></a>
         </div>
+        {% endfor %}
     </div>
 
    

@@ -1,4 +1,5 @@
 // script.js
+
 export const socket = io(); // Nur das hier
 
 export let username = null;
@@ -16,3 +17,17 @@ function register() {
 }
 
 window.register = register;
+
+
+function socketEventCreateLobby() {
+    let lobbyName = "Pias test Lobby";
+    let lobbyType = "flip7";
+    let hostId = "123meinehostid";
+
+    let data = [lobbyName,lobbyType,hostId]
+    console.log("clicked");
+    socket.emit('socketEventCreateLobby', data);
+
+}
+
+window.socketEventCreateLobby = socketEventCreateLobby;

@@ -14,9 +14,18 @@ def flip7MainLobby():
 
     # shows all existing lobbys
     open_lobbies = lobbyStorage.list_open()
-    print("flip7 lobbies:", open_lobbies)
 
     return render_template('flip7MainLobby.html', open_lobbies = open_lobbies)
+
+
+
+@flip7LobbyBp.route('/lobby/flip7/create')
+def flip7CreateLobby():
+    print("[ROUTE] Aufgerufen: /lobby/flip7/create")
+
+    
+
+    return render_template('flip7CreateLobby.html')
 
 
 @flip7LobbyBp.route('/lobby/flip7/<int:id>', methods=['GET', 'POST'])

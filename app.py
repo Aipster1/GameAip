@@ -10,6 +10,8 @@ from lobbys.mainLobby.mainLobby import mainLobbyBp
 from lobbys.flip7Lobby.flip7Lobby import flip7LobbyBp
 from games.gameFlip7.flip7 import gameFlip7Bp
 
+from socketEvents.lobby import initLobbySocketEvents
+
 # from GameAip.socketEvents import socketEventsInit
 
 app = Flask(__name__, static_url_path='/static')
@@ -36,6 +38,8 @@ def register():
 
 # Init for all socketEvents
 # socketEventsInit()
+
+initLobbySocketEvents(socketio)
 
 def getLocalIp():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

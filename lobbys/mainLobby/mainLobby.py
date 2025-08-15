@@ -16,8 +16,7 @@ def current_user_id():
 
 @mainLobbyBp.route('/lobby')
 def lobby():
-
-    # Test for lobbys
     print("[ROUTE] Aufgerufen: / (lobby)")
-    
+   
+
     return render_template('lobby.html')

@@ -1,0 +1,19 @@
+<head>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script type="module" src="{{ url_for('mainLobbyBp.static', filename='js/lobby.js') }}" defer></script>
+
+</head>
+
+<h1>Du kannst hier eine flip7 Lobby erstellen!!!</h1>
+
+
+
+
+<h1>Hier gibst du ein Namen ein</h1>
+
+
+
+
+<h1>Hier stellst du die Spieleranzahl ein</h1>
+
+<button onclick="socketEventCreateLobby()" >create</button>

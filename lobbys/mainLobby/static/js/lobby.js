@@ -22,9 +22,9 @@ window.register = register;
 function socketEventCreateLobby() {
     let lobbyName = "Pias test Lobby";
     let lobbyType = "flip7";
-    let hostId = "123meinehostid";
+    
 
-    let data = [lobbyName,lobbyType,hostId]
+    let data = [lobbyName,lobbyType]
     console.log("clicked");
     socket.emit('socketEventCreateLobby', data);
 

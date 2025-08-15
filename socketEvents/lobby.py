@@ -1,18 +1,19 @@
 from lobbys.lobbyManager import lobbyStorage
+from utils.utils import current_user_id
 
 # socketevent CreateLobby(type)
 def initLobbySocketEvents(socketio):
 
     @socketio.on('socketEventCreateLobby')
     def socketEventCreateLobby(data):
-        print("cool")
-        print("try to create lobby")
+        print("creating lobby...")
         lobbyName = data[0]
         lobbyType = data[1]
-        userId = data[2]
+        userId = current_user_id()
 
         lobbyStorage.create(lobbyName, lobbyType, userId)
         print(lobbyStorage.list_open())
+        print("Lobby created!")
 
 
 

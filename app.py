@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 from flask_socketio import SocketIO
 import socket
 from flask import Flask, render_template, request
@@ -12,12 +12,21 @@ from games.gameFlip7.flip7 import gameFlip7Bp
 
 from socketEvents.lobby import initLobbySocketEvents
 
+from datetime import timedelta
+
+from utils.utils import current_user_id
+
 # from GameAip.socketEvents import socketEventsInit
 
 app = Flask(__name__, static_url_path='/static')
-app.secret_key = 'aipsterKeyWuh'
+
+app.secret_key = b'aipsterKeyWuh'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
+
 
 socketio = SocketIO(app, ping_interval=60, ping_timeout=600)
+
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=3)
 
 
 app.register_blueprint(mainLobbyBp, url_prefix='/')
@@ -27,6 +36,9 @@ app.register_blueprint(gameFlip7Bp, url_prefix='/')
 
 @app.route('/')
 def index():
+    
+    current_user_id()
+
     print("[ROUTE] Aufgerufen: / (index)")
     return render_template('index.html')
 
@@ -34,10 +46,13 @@ def index():
 @app.route('/register')
 def register():
     print("[ROUTE] Aufgerufen: / (register)")
+
     return render_template('register.html')
+
 
 # Init for all socketEvents
 # socketEventsInit()
+
 
 initLobbySocketEvents(socketio)
 

@@ -4,16 +4,8 @@
 
 </head>
 
-<h1>Du kannst hier eine flip7 Lobby erstellen!!!</h1>
-
-
-
-
-<h1>Hier gibst du ein Namen ein</h1>
-
-
-
-
-<h1>Hier stellst du die Spieleranzahl ein</h1>
-
-<button onclick="socketEventCreateLobby()" >create</button>
+<form method="post">
+  <input name="name" placeholder="Lobbyname">
+  <input name="max_players" type="number" min="2" max="7" value="7">
+  <button type="submit">create</button>
+</form>

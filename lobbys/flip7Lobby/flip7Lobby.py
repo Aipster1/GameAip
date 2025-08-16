@@ -1,5 +1,6 @@
-from flask import render_template, Blueprint
+from flask import redirect, render_template, Blueprint, request, url_for
 from lobbys.lobbyManager import lobbyStorage
+from utils.utils import currentUserId
 
 
 flip7LobbyBp = Blueprint('flip7LobbyBp', __name__,
@@ -13,26 +14,34 @@ def flip7MainLobby():
     print("[ROUTE] Aufgerufen: /lobby/flip7")
 
     # shows all existing lobbys
-    open_lobbies = lobbyStorage.list_open()
+    openFlip7Lobbies = lobbyStorage.listOpen()
 
-    return render_template('flip7MainLobby.html', open_lobbies = open_lobbies)
+    return render_template('flip7MainLobby.html', openFlip7Lobbies = openFlip7Lobbies)
 
 
 
-@flip7LobbyBp.route('/lobby/flip7/create')
+
+@flip7LobbyBp.route('/lobby/flip7/create', methods=['GET', 'POST'])
 def flip7CreateLobby():
     print("[ROUTE] Aufgerufen: /lobby/flip7/create")
-
+    print("mach ich")
+    if request.method == 'POST':
+        print("habe gepostet")
+        name = (request.form.get('name') or 'Neue Lobby').strip()
+        lobby = lobbyStorage.create(name=name, lobbyType='flip7', hostId=currentUserId())
+        return redirect(url_for('flip7LobbyBp.flip7GameLobby', id=lobby.id))
     
-
     return render_template('flip7CreateLobby.html')
 
 
-@flip7LobbyBp.route('/lobby/flip7/<int:id>', methods=['GET', 'POST'])
+
+@flip7LobbyBp.route('/lobby/flip7/<string:id>', methods=['GET', 'POST'])
 def flip7GameLobby(id):
-    print("[ROUTE] Aufgerufen: /lobby/flip7")
+    print("[ROUTE] Aufgerufen: /lobby/flip7/id")
 
-    # shows all existing lobbys
+    flip7Lobby = lobbyStorage.get(id)
 
-    return render_template('flip7GameLobby.html')
+    print(flip7Lobby)
+
+    return render_template('flip7GameLobby.html', flip7Lobby=flip7Lobby)
 

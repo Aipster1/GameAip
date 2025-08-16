@@ -19,17 +19,17 @@
         </div>
 
         <!-- Lobby Liste -->
-         {% for lobby in open_lobbies %}
+         {% for lobby in openFlip7Lobbies %}
         <div class="lobby-list">
             <div class="lobby-row">
                 <span class="lobby-name">{{ lobby.name }}</span>
             </div>
             <div class="lobby-row">
 
-             <a href="/lobby/flipSevenLobby/flipSevenInGame"><button class="ready-button">Beitreten</button></a>
+             <a href="{{ url_for('flip7LobbyBp.flip7GameLobby', id=lobby.id) }}"><button class="ready-button">Beitreten</button></a>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
 
    
 <a href="{{ url_for('mainLobbyBp.lobby') }}">

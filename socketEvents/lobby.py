@@ -1,5 +1,6 @@
+from flask import render_template, url_for
 from lobbys.lobbyManager import lobbyStorage
-from utils.utils import current_user_id
+from utils.utils import currentUserId
 
 # socketevent CreateLobby(type)
 def initLobbySocketEvents(socketio):
@@ -9,10 +10,15 @@ def initLobbySocketEvents(socketio):
         print("creating lobby...")
         lobbyName = data[0]
         lobbyType = data[1]
-        userId = current_user_id()
+        userId = currentUserId()
 
         lobbyStorage.create(lobbyName, lobbyType, userId)
-        print(lobbyStorage.list_open())
+        
+        # todo:
+        # method for getting the lobby where this userId is the hostid
+        # and redirect to the lobby with this id
+        
+        print(lobbyStorage.listOpen())
         print("Lobby created!")
 
 

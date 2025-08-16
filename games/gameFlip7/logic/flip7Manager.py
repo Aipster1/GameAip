@@ -26,7 +26,7 @@ class Card:
     
 
 ### Deck functions ###
-def build_deck():
+def buildDeck():
     """Function to build the deck."""
 
     # init empty deck
@@ -50,7 +50,7 @@ def build_deck():
     return deck
 
 
-def remove_card_from_deck(card, deck):
+def removeCardFromDeck(card, deck):
     """Function to remove a card from a deck."""
     #todo: check if enough cards are in the deck
     # else shuffle discard pile and add to deck
@@ -59,44 +59,44 @@ def remove_card_from_deck(card, deck):
     print("removed card:", card)
 
 
-def shuffle_deck(deck):
+def shuffleDeck(deck):
     """Function to shuffle a deck."""
     random.shuffle(deck)
 
 ### player functions ###
 
-def draw_card(num_cards, deck):
+def drawCard(numCards, deck):
     """Function to draw cards."""
 
-    drawn_cards = deck[0:num_cards]
+    drawnCards = deck[0:numCards]
 
-    for card in drawn_cards:
-        remove_card_from_deck(card, deck)
+    for card in drawnCards:
+        removeCardFromDeck(card, deck)
 
-    return drawn_cards
+    return drawnCards
 
 
-def get_player_hand(player):
+def getPlayerHand(player):
     """Function to get all cards of a player."""
-    hand = game_data["players"][f"{player}"]["cards"]
+    hand = gameData["players"][f"{player}"]["cards"]
     return hand
 
 
-def clear_player_hand(player):
+def clearPlayerHand(player):
     """Function to clear all cards of a player."""
-    game_data["players"][f"{player}"]["cards"] = []
+    gameData["players"][f"{player}"]["cards"] = []
 
 
-def player_bust(player):
+def playerBust(player):
     """Function to bust a player. Removes all cards from hand and puts them on the discard pile."""
-    player_hand = get_player_hand(player)
+    playerHand = getPlayerHand(player)
 
-    discard_pile.append(player_hand)
+    discardPile.append(playerHand)
     
-    clear_player_hand(player)
+    clearPlayerHand(player)
 
 
-def get_deck_card_count(deck):
+def getDeckCardCount(deck):
 
     result = len(deck)
 
@@ -104,8 +104,8 @@ def get_deck_card_count(deck):
 
 
 # initialize
-game_data = {
-    "round_count":0,
+gameData = {
+    "roundCount":0,
     "players": {
         "tim":{
             "cards": [],
@@ -116,28 +116,28 @@ game_data = {
             "points": 0,
         }
     },
-    "current_player": "tim",
+    "currentPlayer": "tim",
 }
 
 
-discard_pile = []
+discardPile = []
 
-deck = build_deck()
+deck = buildDeck()
 
-shuffle_deck(deck)
+shuffleDeck(deck)
 
 
 # game logic
 
-hand = draw_card(3, deck)
+hand = drawCard(3, deck)
 
-game_data["players"]["tim"]["cards"] = hand
+gameData["players"]["tim"]["cards"] = hand
 
-print("game_data: ", game_data)
+print("gameData: ", gameData)
 
-player_bust("tim")
+playerBust("tim")
 
-print(discard_pile)
+print(discardPile)
 
-print("tims hand: ", game_data["players"]["tim"]["cards"])
+print("tims hand: ", gameData["players"]["tim"]["cards"])
 

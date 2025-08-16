@@ -7,36 +7,34 @@
     
     <link rel="stylesheet" href="{{ url_for('flip7LobbyBp.static', filename='css/flip7Lobby.css') }}">
 
-    
 </head>
 <body>
     <h1 class="header">flipSeven GameLobby</h1>
 
     <div class="lobby-container">
-        <!-- Hosten Button -->
-        <div class="host-box">
-            <button class="ready-button">Hosten</button>
-        </div>
-
+        
         <!-- Lobby Liste -->
         <div class="lobby-list">
             <div class="lobby-row">
-                <span class="lobby-name">LobbyName1</span>
-                <span class="lobby-players">5/9</span>
-            </div>
-            <div class="lobby-row">
-                <span class="lobby-name">LobbyName2</span>
-                <span class="lobby-players">2/10</span>
-            </div>
-            <div class="lobby-row empty"></div>
-            <div class="lobby-row empty"></div>
 
-             <a href="/lobby/flipSevenLobby/flipSevenInGame"><button class="ready-button">Beitreten</button></a>
+                <!-- lobby.name; lobby.type; lobby.hostId; lobby.members -->
+
+                <span class="lobby-name">{{ flip7Lobby.name }} </span>
+              
+              
+                <span class="lobby-players">{{ flip7Lobby.id }} </span>
+
+                <h2>max member count: {{ flip7Lobby.maxMemberCount }}</h2>
+                <h2>member count: {{flip7Lobby.members|length}} </h2>
+                
+                
+            </div>
         </div>
+        <a href="{{ url_for('gameFlip7Bp.flip7CreateGame', lobbyId = flip7Lobby.id, gameType = flip7Lobby.lobbyType, membersList = flip7Lobby.members ) }}"><button>start Game</button></a>
     </div>
 
    
-<a href="{{ url_for('mainLobbyBp.lobby') }}">
+<a href="{{ url_for('flip7LobbyBp.flip7MainLobby') }}">
             <div class="back-container">
         <button class="back-button">Zurück</button>
     </div>

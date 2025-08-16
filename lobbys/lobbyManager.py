@@ -1,3 +1,4 @@
+from secrets import token_hex
 from typing import Dict, List
 import uuid
 from dataclasses import dataclass, field
@@ -7,10 +8,11 @@ from dataclasses import dataclass, field
 class Lobby:
     id: str
     name: str
-    lobby_type: str
-    host_id: str
+    lobbyType: str
+    hostId: str
     members: List[str] = field(default_factory=list)
-    is_open: bool = True
+    maxMemberCount: int = 1
+    isOpen: bool = True
 
 
 class LobbyStore:
@@ -18,36 +20,46 @@ class LobbyStore:
         self._lobbies: Dict[str, Lobby] = {}
 
 
-    def create(self, name: str, lobby_type: str, host_id: str) -> Lobby:
-            lobby_id = uuid.uuid4().hex[:6].upper()
-            lobby = Lobby(id=lobby_id, name=name, lobby_type=lobby_type, host_id=host_id, members=[host_id])
-            self._lobbies[lobby_id] = lobby
+    def create(self, name: str, lobbyType: str, hostId: str) -> Lobby:
+            match lobbyType:
+                case "flip7":
+                    maxMember = 7
+                    lobbyId =  f"flip7Lobby_{token_hex(4)}"
+                case _:
+                    lobbyId =  f"genericLobby_{token_hex(4)}"
+                
+                # case "keywords":
+                #     maxMember = 10
+                #     lobbyId =  f"keywordsLobby_{token_hex(4)}"
+
+            lobby = Lobby(id=lobbyId, name=name, lobbyType=lobbyType, hostId=hostId, members=[hostId], maxMemberCount=maxMember)
+            self._lobbies[lobbyId] = lobby
             return lobby
     
 
-    def get(self, lobby_id: str) -> Lobby | None:
-        return self._lobbies.get(lobby_id)
+    def get(self, lobbyId: str) -> Lobby | None:
+        return self._lobbies.get(lobbyId)
 
 
-    def join(self, lobby_id: str, user_id: str):
-        lob = self._lobbies[lobby_id]
-        if user_id not in lob.members:
-            lob.members.append(user_id)
+    def join(self, lobbyId: str, userId: str):
+        lob = self._lobbies[lobbyId]
+        if userId not in lob.members:
+            lob.members.append(userId)
             
 
-    def leave(self, lobby_id: str, user_id: str):
-        lob = self._lobbies[lobby_id]
-        if user_id in lob.members:
-            lob.members.remove(user_id)
+    def leave(self, lobbyId: str, userId: str):
+        lob = self._lobbies[lobbyId]
+        if userId in lob.members:
+            lob.members.remove(userId)
             if not lob.members:
-                self._lobbies.pop(lobby_id, None)
-            elif lob.host_id == user_id:  
-                lob.host_id = lob.members[0]
+                self._lobbies.pop(lobbyId, None)
+            elif lob.hostId == userId:  
+                lob.hostId = lob.members[0]
         # emit(updateLobby)
 
 
-    def list_open(self) -> List[Lobby]:
-        return [l for l in self._lobbies.values() if l.is_open]
+    def listOpen(self) -> List[Lobby]:
+        return [l for l in self._lobbies.values() if l.isOpen]
     
 
     def delete():

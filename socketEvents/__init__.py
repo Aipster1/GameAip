@@ -1,18 +1,19 @@
 from flask import request, session
+from .lobby import initLobbySocketEvents
 # from socketEvents.flip7 import flip7Init
+
+currentPlayers = {}
 
 def socketEventsInit(socketio, connectedIpAddresses):
     
-    currentPlayers = {}
-
     @socketio.on('connect')
-    def handle_connect():
+    def handleConnect():
         session.permanent = True
-        ip_address = request.remote_addr
+        ipAddress = request.remote_addr
         
-        if ip_address not in connectedIpAddresses:
-            connectedIpAddresses[ip_address] = {
-                'ip': ip_address,
+        if ipAddress not in connectedIpAddresses:
+            connectedIpAddresses[ipAddress] = {
+                'ip': ipAddress,
             }
     
         print("→ Aktuell verbundene IPs:")
@@ -22,24 +23,26 @@ def socketEventsInit(socketio, connectedIpAddresses):
 
 
     @socketio.on('register')
-    def handle_register(data):
+    def handleRegister(data):
+
         name = data['username']
         lowerCaseName = name.lower()
-        ip_address = request.remote_addr
+        ipAddress = request.remote_addr
 
         if lowerCaseName in currentPlayers and currentPlayers[lowerCaseName]["status"] == "disconnected":
             currentPlayers[lowerCaseName]["status"] = "connected"
-            print(f"Spieler RECONNECTED: {name} (IP: {ip_address})")
+            print(f"Spieler RECONNECTED: {name} (IP: {ipAddress})")
             return
 
         playerData = {
             'username': name,
-            'ip': ip_address,
+            'ip': ipAddress,
             'status': "connected"
         }
 
         currentPlayers[lowerCaseName] = playerData
-        print(f"Neuer Spieler registriert: {name} (IP: {ip_address})")
+
+        print(f"Neuer Spieler registriert: {name} (IP: {ipAddress})")
 
 
     @socketio.on('disconnect')
@@ -50,6 +53,7 @@ def socketEventsInit(socketio, connectedIpAddresses):
         for player in currentPlayers.values():
             if player['ip'] == ipAddress:
                 player['status'] = "disconnected"
+
                 disconnectedUser = player['username']
                 break
 
@@ -57,3 +61,6 @@ def socketEventsInit(socketio, connectedIpAddresses):
             print(f"Spieler getrennt: {disconnectedUser} (IP: {ipAddress})")
         else:
             print(f"Verbindung getrennt (unregistrierte IP): {ipAddress}")
+
+    #init LobbySockets
+    initLobbySocketEvents(socketio)

@@ -13,26 +13,10 @@
 
     <div class="lobby-container">
         
-        <!-- Lobby Liste -->
-        <div class="lobby-list">
-            <div class="lobby-row">
-
-                <!-- lobby.name; lobby.type; lobby.hostId; lobby.members -->
-
-                <span class="lobby-name">{{ flip7Lobby.name }} </span>
-              
-              
-                <span class="lobby-players">{{ flip7Lobby.id }} </span>
-
-                <h2>max member count: {{ flip7Lobby.maxMemberCount }}</h2>
-                <h2>member count: {{flip7Lobby.members|length}} </h2>
-                
-                
-            </div>
-        </div>
-        <a href="{{ url_for('gameFlip7Bp.flip7CreateGame', lobbyId = flip7Lobby.id, gameType = flip7Lobby.lobbyType, membersList = flip7Lobby.members ) }}"><button>start Game</button></a>
-    </div>
-
+        <form action="{{ url_for('gameFlip7Bp.flip7CreateGame') }}" method="post">
+            <input type="hidden" name="lobbyId" value="{{ flip7Lobby.id }}">
+            <button type="submit">Start Game</button>
+        </form>
    
 <a href="{{ url_for('flip7LobbyBp.flip7MainLobby') }}">
             <div class="back-container">

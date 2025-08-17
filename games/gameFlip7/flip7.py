@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, abort, redirect, render_template, request, url_for
 from .logic.flip7Manager import *
-from lobbys.lobbyManager import Lobby
-from dataclasses import dataclass, field
-from utils.utils import createMembersDict, createGameId
+from utils.utils import createMembersDict
+from games.gameManager import gameStorage
+from lobbys.lobbyManager import lobbyStorage
 
 gameFlip7Bp = Blueprint('gameFlip7Bp', __name__,
                        template_folder='templates',
@@ -10,48 +10,44 @@ gameFlip7Bp = Blueprint('gameFlip7Bp', __name__,
                         static_url_path='/gameFlip7')
 
 
-@dataclass
-class Flip7Game:
-    id: str
-    lobbyId: str
-    gameType: str
-    members: dict = field(default_factory=dict)
-
-
-@gameFlip7Bp.route('/game/flip7/create', methods=['GET'])
+@gameFlip7Bp.route('/game/flip7/create', methods=['GET', 'POST'])
 def flip7CreateGame():
-    print("[ROUTE] Aufgerufen: /game/flip7/<string:id>")
-
-    gameId = createGameId("flip7")
-
-    lobbyId = request.args.get('lobbyId')
-    gameType = request.args.get('gameType')
-    membersList = request.args.getlist('membersList')
-
-    gameMembersList = createMembersDict(membersList)
-
-
-    game = Flip7Game(id=gameId, lobbyId = lobbyId, gameType = gameType, members = gameMembersList)
-
-    print(game)
     
-    return render_template('flip7Game.html')
+    lobby_id = request.form.get('lobbyId')
+
+    if not lobby_id:
+        abort(400, description="lobbyId required")
+
+    # Look up authoritative lobby server-side (avoid trusting client data)
+    lobby = lobbyStorage.get(lobby_id)  
+    if not lobby:
+        abort(404, description="Lobby not found")
+
+    game_members_list = createMembersDict(lobby.members)
+
+    game = gameStorage.create(lobbyId=lobby_id, gameType=lobby.lobbyType, members=game_members_list)
+    
+    game_id = getattr(game, "id", game) 
+
+    print("gameid: ", game_id)
+
+    print(gameStorage.get(game_id))
+
+    # Redirect after POST (303 is ideal to force GET)
+    return redirect(url_for("gameFlip7Bp.flip7Game", id=game_id), code=303)
+    
 
 
 @gameFlip7Bp.route('/game/flip7/<string:id>')
 def flip7Game(id):
     print("[ROUTE] Aufgerufen: /game/flip7/<string:id>")
 
+    game = gameStorage.get(id)
+    if not game:
+        print("no game found")
+    else:
+        print(game)
 
+    return render_template('flip7Game.html', game=game)
 
-    # deck = build_deck()
-    
-    # shuffle_deck(deck)
-
-    # hand = draw_card(6, deck)
-
-    # player_cards = hand
-
-    # print(get_deck_card_count(deck))
-
-    return render_template('flip7Game.html')
+ 

@@ -120,24 +120,24 @@ gameData = {
 }
 
 
-discardPile = []
+# discardPile = []
 
-deck = buildDeck()
+# deck = buildDeck()
 
-shuffleDeck(deck)
+# shuffleDeck(deck)
 
 
-# game logic
+# # game logic
 
-hand = drawCard(3, deck)
+# hand = drawCard(3, deck)
 
-gameData["players"]["tim"]["cards"] = hand
+# gameData["players"]["tim"]["cards"] = hand
 
-print("gameData: ", gameData)
+# print("gameData: ", gameData)
 
-playerBust("tim")
+# playerBust("tim")
 
-print(discardPile)
+# print(discardPile)
 
-print("tims hand: ", gameData["players"]["tim"]["cards"])
+# print("tims hand: ", gameData["players"]["tim"]["cards"])
 

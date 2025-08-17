@@ -22,27 +22,27 @@ def socketEventsInit(socketio, connectedIpAddresses):
         print("")
 
 
-    @socketio.on('register')
-    def handleRegister(data):
+    # @socketio.on('register')
+    # def handleRegister(data):
 
-        name = data['username']
-        lowerCaseName = name.lower()
-        ipAddress = request.remote_addr
+    #     name = data['username']
+    #     lowerCaseName = name.lower()
+    #     ipAddress = request.remote_addr
 
-        if lowerCaseName in currentPlayers and currentPlayers[lowerCaseName]["status"] == "disconnected":
-            currentPlayers[lowerCaseName]["status"] = "connected"
-            print(f"Spieler RECONNECTED: {name} (IP: {ipAddress})")
-            return
+    #     if lowerCaseName in currentPlayers and currentPlayers[lowerCaseName]["status"] == "disconnected":
+    #         currentPlayers[lowerCaseName]["status"] = "connected"
+    #         print(f"Spieler RECONNECTED: {name} (IP: {ipAddress})")
+    #         return
 
-        playerData = {
-            'username': name,
-            'ip': ipAddress,
-            'status': "connected"
-        }
+    #     playerData = {
+    #         'username': name,
+    #         'ip': ipAddress,
+    #         'status': "connected"
+    #     }
 
-        currentPlayers[lowerCaseName] = playerData
+    #     currentPlayers[lowerCaseName] = playerData
 
-        print(f"Neuer Spieler registriert: {name} (IP: {ipAddress})")
+    #     print(f"Neuer Spieler registriert: {name} (IP: {ipAddress})")
 
 
     @socketio.on('disconnect')

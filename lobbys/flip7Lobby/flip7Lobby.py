@@ -20,7 +20,6 @@ def flip7MainLobby():
 
 
 
-
 @flip7LobbyBp.route('/lobby/flip7/create', methods=['GET', 'POST'])
 def flip7CreateLobby():
     print("[ROUTE] Aufgerufen: /lobby/flip7/create")
@@ -31,6 +30,7 @@ def flip7CreateLobby():
         # todo: currentUserId() generates a random id if you create a lobby and are not registered before
         
         lobby = lobbyStorage.create(name=name, lobbyType='flip7', hostId=currentUserId())
+
         return redirect(url_for('flip7LobbyBp.flip7GameLobby', id=lobby.id))
     
     return render_template('flip7CreateLobby.html')

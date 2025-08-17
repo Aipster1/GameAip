@@ -16,7 +16,7 @@ import random
 #         self.value = value
 #         self.filename = filename
   
-
+discardPile = []
 
 @dataclass
 class Card:
@@ -120,7 +120,7 @@ gameData = {
 }
 
 
-# discardPile = []
+
 
 # deck = buildDeck()
 

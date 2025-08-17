@@ -20,7 +20,7 @@ def socketEventsInit(socketio, connectedIpAddresses):
         for ip, info in connectedIpAddresses.items():
             print(f"   - IP        : {info['ip']}")
         print("")
-
+    
 
     # @socketio.on('register')
     # def handleRegister(data):

@@ -16,11 +16,5 @@ def lobby():
     if 'uid' not in session:
         # not registered so return to /register
         return redirect(url_for('register'))
-    
-
-    print(currentPlayers)
-    print("session uid:", session["uid"])
-    # todo: username in session["uid"] speichern somit ist playerdata und lobby verknüpft
-    # session["uid"] = currentPlayers["username"]
 
     return render_template('lobby.html')

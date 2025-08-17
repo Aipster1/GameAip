@@ -3,6 +3,7 @@ from .logic.flip7Manager import *
 from utils.utils import createMembersDict
 from games.gameManager import gameStorage
 from lobbys.lobbyManager import lobbyStorage
+from flask_socketio import join_room, leave_room, close_room
 
 gameFlip7Bp = Blueprint('gameFlip7Bp', __name__,
                        template_folder='templates',
@@ -32,6 +33,8 @@ def flip7CreateGame():
     print("gameid: ", game_id)
 
     print(gameStorage.get(game_id))
+
+    # join_room()
 
     # Redirect after POST (303 is ideal to force GET)
     return redirect(url_for("gameFlip7Bp.flip7Game", id=game_id), code=303)

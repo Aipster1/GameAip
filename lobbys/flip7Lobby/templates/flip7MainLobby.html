@@ -4,10 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lobby</title>
-    
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script type="module" src="{{ url_for('flip7LobbyBp.static', filename='js/flip7Lobby.js') }}" defer></script>
     <link rel="stylesheet" href="{{ url_for('flip7LobbyBp.static', filename='css/flip7Lobby.css') }}">
+    <script>
+    window.socket = io(); // global
 
-    
+    window.socket.on('connect', () => console.log('connected as', window.socket.id));
+
+    window.socket.on('redirect', ({ url }) => {
+        console.log('redirect to', url);
+        window.location.href = url;
+    });
+
+    function joinLobby(lobbyId) {
+        window.socket.emit('join_lobby', { lobbyId });
+    }
+    </script>
+
+
+        
 </head>
 <body>
     <h1 class="header">flipSeven MainLobby</h1>
@@ -26,7 +42,7 @@
             </div>
             <div class="lobby-row">
 
-             <a href="{{ url_for('flip7LobbyBp.flip7GameLobby', id=lobby.id) }}"><button class="ready-button">Beitreten</button></a>
+            <button type="button" onclick="joinLobby('{{ lobby.id }}')">Beitreten</button>
         </div>
     </div>
     {% endfor %}

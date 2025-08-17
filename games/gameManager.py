@@ -29,6 +29,9 @@ class GameStore:
     def get(self, gameId: str) -> Game | None:
         return self._games.get(gameId)
 
+    def reconnect(self, player):
+        pass
+
 
     # def join(self, lobbyId: str, userId: str):
     #     lob = self._lobbies[lobbyId]

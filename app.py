@@ -27,12 +27,14 @@ app.register_blueprint(mainLobbyBp, url_prefix='/')
 app.register_blueprint(flip7LobbyBp, url_prefix='/')
 app.register_blueprint(gameFlip7Bp, url_prefix='/')
 
+
+
 connectedIpAddresses = {}
+
+
 
 @app.route('/')
 def index():
-    
-    session.clear()
     
     print("[ROUTE] Aufgerufen: / (index)")
     return render_template('index.html')
@@ -42,6 +44,8 @@ def index():
 def register():
     print("[ROUTE] Aufgerufen: / (register)")
     
+    session.clear()
+
     if request.method == 'POST':
         username = request.form.get('name')
         
@@ -57,11 +61,14 @@ def register():
 
         playerData = {
             'username': username,
+            'sid': "",
             'ip': ipAddress,
             'status': "connected"
         }
 
         currentPlayers[lowerCaseName] = playerData
+
+        print(currentPlayers)
 
         return redirect(url_for('mainLobbyBp.lobby',))
     

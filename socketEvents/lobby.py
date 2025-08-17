@@ -1,8 +1,8 @@
 from flask import redirect, render_template, request, session, url_for
-from flask_socketio import emit, join_room
+from flask_socketio import emit, join_room, rooms
 import socketio
 from lobbys.lobbyManager import lobbyStorage
-from utils.utils import currentUserId
+from utils.utils import currentUserId, getLobbyRoom
 
 # socketevent CreateLobby(type)
 def initLobbySocketEvents(socketio):
@@ -44,8 +44,7 @@ def initLobbySocketEvents(socketio):
 
         if len(lobby.members) >= lobby.maxMemberCount:
             return emit('error', {'message': 'Lobby full'})
-        
-        join_room(_lobby_room(lobbyId))
+    
         
         lobby.members.append(username)
 
@@ -54,12 +53,31 @@ def initLobbySocketEvents(socketio):
         emit('redirect', {
         'url': url_for('flip7LobbyBp.flip7GameLobby', id=lobbyId)
     })
-    
-
-
-    def _lobby_room(lobbyId): return f"lobby:{lobbyId}"
         
 
+    @socketio.on('join_room')
+    def on_join_lobby(data):
+
+        lobbyId = data.get('lobbyId')
+    
+        join_room(getLobbyRoom(lobbyId))
+        print("sind dem raum beigetreten")
+
+
+    
+    @socketio.on('start_game')
+    def on_game_start(data):
+        lobbyId = data.get('lobbyId')
+        
+        print("Das ist die lobbyId dazu: ", lobbyId)
+        
+        # create game
+        # hole game id 
+
+        # todo: change to join game room 
+        # join_room(getLobbyRoom())
+        
+        emit('redirect', {'url': url_for('gameFlip7Bp.flip7Game')}, room=getLobbyRoom(lobbyId))
 
 
 # socketevent LeaveLobby(id)

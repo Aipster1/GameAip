@@ -4,18 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lobby</title>
-    
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script type="module" src="{{ url_for('flip7LobbyBp.static', filename='js/flip7Lobby.js') }}" defer></script>
     <link rel="stylesheet" href="{{ url_for('flip7LobbyBp.static', filename='css/flip7Lobby.css') }}">
+
+    
 
 </head>
 <body>
+
+    <script>
+    // Make socket global so inline/other scripts can use it
+    window.socket = io();
+
+    
+    var lobbyId = "{{ flip7LobbyId }}";
+    window.socket.emit('join_room', { lobbyId: lobbyId });
+    
+
+    window.socket.on('redirect', ({ url }) => {
+        console.log('redirect to', url);
+        window.location.href = url;
+    });
+
+    function startGame(){
+        var lobbyId = "{{ flip7LobbyId }}";
+        window.socket.emit('start_game', { lobbyId: lobbyId });
+    }
+    </script>
+
+
     <h1 class="header">flipSeven GameLobby</h1>
 
     <div class="lobby-container">
-        
+
         <form action="{{ url_for('gameFlip7Bp.flip7CreateGame') }}" method="post">
-            <input type="hidden" name="lobbyId" value="{{ flip7Lobby.id }}">
-            <button type="submit">Start Game</button>
+           
+            {% if lobby.hostId == session["uid"] %}
+    
+                <button type="button" onclick="startGame()">Start Game</button>
+
+            {% endif %}
+
         </form>
    
 <a href="{{ url_for('flip7LobbyBp.flip7MainLobby') }}">

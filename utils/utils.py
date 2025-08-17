@@ -22,4 +22,7 @@ def createMembersDict(membersList):
                             "score" : 0 }
                             
     return players
-    
+
+
+def getLobbyRoom(lobbyId): 
+    return f"lobby:{lobbyId}"

@@ -1,6 +1,7 @@
-from flask import redirect, render_template, Blueprint, request, url_for
+from flask import redirect, render_template, Blueprint, request, session, url_for
+from flask_socketio import join_room
 from lobbys.lobbyManager import lobbyStorage
-from utils.utils import currentUserId
+from utils.utils import currentUserId, getLobbyRoom
 
 
 flip7LobbyBp = Blueprint('flip7LobbyBp', __name__,
@@ -27,9 +28,7 @@ def flip7CreateLobby():
     if request.method == 'POST':
         name = (request.form.get('name') or 'Neue Lobby').strip()
         
-        # todo: currentUserId() generates a random id if you create a lobby and are not registered before
-        
-        lobby = lobbyStorage.create(name=name, lobbyType='flip7', hostId=currentUserId())
+        lobby = lobbyStorage.create(name=name, lobbyType='flip7', hostId=session["uid"])
 
         return redirect(url_for('flip7LobbyBp.flip7GameLobby', id=lobby.id))
     
@@ -41,9 +40,9 @@ def flip7CreateLobby():
 def flip7GameLobby(id):
     print("[ROUTE] Aufgerufen: /lobby/flip7/id")
 
+
     flip7Lobby = lobbyStorage.get(id)
-
-    print(flip7Lobby)
-
-    return render_template('flip7GameLobby.html', flip7Lobby=flip7Lobby)
-
+    flip7LobbyId = flip7Lobby.id
+    print("lobbyId:", flip7Lobby.id)
+    
+    return render_template('flip7GameLobby.html', flip7LobbyId=flip7LobbyId, lobby=flip7Lobby, session=session)

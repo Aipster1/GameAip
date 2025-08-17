@@ -1,7 +1,7 @@
 
 from datetime import timedelta
-from flask import Flask, redirect, render_template, session, url_for
-from flask_socketio import SocketIO
+from flask import Flask, flash, redirect, render_template, session, url_for
+from flask_socketio import SocketIO, emit
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 import socket
@@ -35,7 +35,7 @@ connectedIpAddresses = {}
 
 @app.route('/')
 def index():
-    
+    session.clear()
     print("[ROUTE] Aufgerufen: / (index)")
     return render_template('index.html')
 
@@ -44,11 +44,16 @@ def index():
 def register():
     print("[ROUTE] Aufgerufen: / (register)")
     
-    session.clear()
 
     if request.method == 'POST':
-        username = request.form.get('name')
+        username = (request.form.get('name') or '').strip()
+        if any(u.lower() == username.lower() for u in currentPlayers):
+            flash('Username already taken. Please choose another.', 'error')
+            # Either re-render the form:
+            return render_template('register.html', username=username), 409
         
+        # todo: check if user is already registered so you can not register 2 times with different usernames
+
         session["uid"] = username
 
         lowerCaseName = username.lower()
@@ -75,7 +80,6 @@ def register():
     return render_template('register.html')
 
 
-
 def getLocalIp():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
@@ -83,6 +87,7 @@ def getLocalIp():
         return s.getsockname()[0]
     finally:
         s.close()
+
 
 if __name__ == '__main__':
     host = '0.0.0.0'

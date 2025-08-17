@@ -40,17 +40,32 @@ def flip7CreateGame():
     return redirect(url_for("gameFlip7Bp.flip7Game", id=game_id), code=303)
     
 
+# @gameFlip7Bp.route('/game/flip7/<string:id>')
+# def flip7Game(id):
+#     print("[ROUTE] Aufgerufen: /game/flip7/<string:id>")
 
-@gameFlip7Bp.route('/game/flip7/<string:id>')
-def flip7Game(id):
+#     game = gameStorage.get(id)
+#     if not game:
+#         print("no game found")
+#     else:
+#         print(game)
+
+#     return render_template('flip7Game.html', game=game)
+
+
+
+@gameFlip7Bp.route('/game/flip7/')
+def flip7Game():
     print("[ROUTE] Aufgerufen: /game/flip7/<string:id>")
 
-    game = gameStorage.get(id)
-    if not game:
-        print("no game found")
-    else:
-        print(game)
 
-    return render_template('flip7Game.html', game=game)
+    print("wir sind im game")
+    # game = gameStorage.get()
+    # if not game:
+    #     print("no game found")
+    # else:
+    #     print(game)
+
+    return render_template('flip7Game.html')
 
  

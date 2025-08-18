@@ -2,7 +2,10 @@ from flask import redirect, render_template, request, session, url_for
 from flask_socketio import emit, join_room, rooms
 import socketio
 from lobbys.lobbyManager import lobbyStorage
-from utils.utils import currentUserId, getLobbyRoom
+from games.gameManager import gameStorage
+from games.members.membersManager import playerStorage
+from utils.utils import currentUserId, getGameRoom, getLobbyRoom
+from games.gameFlip7.flip7 import *
 
 # socketevent CreateLobby(type)
 def initLobbySocketEvents(socketio):
@@ -55,13 +58,29 @@ def initLobbySocketEvents(socketio):
     })
         
 
+    #todo: make the join_room generic
     @socketio.on('join_room')
     def on_join_lobby(data):
 
         lobbyId = data.get('lobbyId')
     
         join_room(getLobbyRoom(lobbyId))
-        print("sind dem raum beigetreten")
+        print(f"user:{session["uid"]} und sid:{request.sid} ist dem raum beigetreten!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
+    
+    @socketio.on('join_game_room')
+    def on_join_lobby(data):
+
+        gameId = data.get('gameId')
+    
+        join_room(getGameRoom(gameId))
+
+
+        playerStorage.create_flip7_player(uid=session["uid"], sid=request.sid, ip=request.remote_addr, hand=[],status="", roundScore=0, totalScore=0)
+
+        print("player erstellt:", playerStorage.get(session["uid"]))
+
+        print("sind dem game beigetreten")
 
 
     
@@ -70,16 +89,41 @@ def initLobbySocketEvents(socketio):
         lobbyId = data.get('lobbyId')
         
         print("Das ist die lobbyId dazu: ", lobbyId)
+
+        lobby = lobbyStorage.get(lobbyId)
+
+        game = gameStorage.create(lobbyId=lobbyId, gameType=lobby.lobbyType, players=lobby.members)
+
+        emit('redirect', {'url': url_for('gameFlip7Bp.flip7Game', id=game.id)}, room=getLobbyRoom(lobbyId))
+
+
+
+
+    @socketio.on('draw_card')
+    def on_game_start(data):
+        gameId = data.get('gameId')
+        uid = data.get('uid')
+        cardCount = data.get('cardCount')
+
+        game = gameStorage.get(gameId)
+
+        game.deck = buildDeck(game.deck)
+
+        shuffleDeck(game.deck)
+
+        player = playerStorage.get(uid)
+
+        cards = drawCard(cardCount, game.deck)
+
+        player.hand.append(cards)
+
+        print("player hand:", player.hand)
+
+        #todo: fix the member logic, lobbys are not fixed to have the member class objects as memebers if that is necessary
+        # for player in game.players:
+        #     print(player, " hand:", player.hand)
         
-        # create game
-        # hole game id 
-
-        # todo: change to join game room 
-        # join_room(getLobbyRoom())
-        
-        emit('redirect', {'url': url_for('gameFlip7Bp.flip7Game')}, room=getLobbyRoom(lobbyId))
 
 
-# socketevent LeaveLobby(id)
 
-# socketevent UpdateLobbyList()
+       

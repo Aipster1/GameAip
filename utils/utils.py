@@ -26,3 +26,6 @@ def createMembersDict(membersList):
 
 def getLobbyRoom(lobbyId): 
     return f"lobby:{lobbyId}"
+
+def getGameRoom(gameId): 
+    return f"game:{gameId}"

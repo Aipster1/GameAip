@@ -16,7 +16,7 @@ import random
 #         self.value = value
 #         self.filename = filename
   
-discardPile = []
+# discardPile = []
 
 @dataclass
 class Card:
@@ -26,11 +26,11 @@ class Card:
     
 
 ### Deck functions ###
-def buildDeck():
+def buildDeck(deck):
     """Function to build the deck."""
 
     # init empty deck
-    deck = []
+    # deck = []
 
     # add all number cards to deck
     for n in range(0, 13):
@@ -87,13 +87,13 @@ def clearPlayerHand(player):
     gameData["players"][f"{player}"]["cards"] = []
 
 
-def playerBust(player):
-    """Function to bust a player. Removes all cards from hand and puts them on the discard pile."""
-    playerHand = getPlayerHand(player)
+# def playerBust(player):
+#     """Function to bust a player. Removes all cards from hand and puts them on the discard pile."""
+#     playerHand = getPlayerHand(player)
 
-    discardPile.append(playerHand)
+#     discardPile.append(playerHand)
     
-    clearPlayerHand(player)
+#     clearPlayerHand(player)
 
 
 def getDeckCardCount(deck):

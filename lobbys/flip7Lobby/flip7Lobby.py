@@ -45,4 +45,4 @@ def flip7GameLobby(id):
     flip7LobbyId = flip7Lobby.id
     print("lobbyId:", flip7Lobby.id)
     
-    return render_template('flip7GameLobby.html', flip7LobbyId=flip7LobbyId, lobby=flip7Lobby, session=session)
+    return render_template('flip7GameLobby.html', flip7LobbyId=flip7LobbyId, lobby=flip7Lobby)

@@ -3,25 +3,29 @@ from secrets import token_hex
 from typing import Dict, List
 
 
+
 @dataclass
 class Game:
     id: str
     lobbyId: str
     gameType: str
-    members: dict = field(default_factory=dict)
+    players: list = field(default_factory=list)
+    currentPlayer: str = ""
+    deck: list = field(default_factory=list)
+    discard_pile: list = ""
     isRunning: bool = True
-
+    
 
 class GameStore:
     def __init__(self):
         self._games: Dict[str, Game] = {}
 
 
-    def create(self, lobbyId: str, gameType: str, members: dict) -> Game:
+    def create(self, lobbyId: str, gameType: str, players: list) -> Game:
             
             gameId = f"{gameType}_{token_hex(4)}"
 
-            game = Game(id=gameId, lobbyId=lobbyId, gameType=gameType, members=members)
+            game = Game(id=gameId, lobbyId=lobbyId, gameType=gameType, players=players)
             self._games[gameId] = game
             return game
     

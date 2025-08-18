@@ -6,10 +6,28 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title>Kartenspiel - Fächer</title>
 
-   
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('gameFlip7Bp.static', filename='css/flip7Ingame.css') }}">
     
     <script type="module" src="{{ url_for('gameFlip7Bp.static', filename='js/flip7.js') }}"></script>
+
+
+     <script>
+        window.socket = io();
+        var gameId = "{{ flip7GameId }}";
+        window.socket.emit('join_game_room', { gameId: gameId });
+        
+
+        function drawCard() {
+            var gameId = "{{ flip7GameId }}";
+            var cardCount = 1;
+            var uid = '{{ session["uid"] }}';
+            window.socket.emit('draw_card', { gameId:gameId, cardCount:cardCount, uid:uid });
+        }
+    </script>
+
+
+
 </head>
 <body>
 <main class="table">
@@ -32,6 +50,8 @@
 
         </div>
     </section>
+
+    <button type="button" onclick="drawCard()">draw</button>
 
 
 

@@ -14,6 +14,7 @@ from games.gameFlip7.flip7 import gameFlip7Bp
 from socketEvents import socketEventsInit, currentPlayers
 
 
+
 app = Flask(__name__, static_url_path='/static')
 
 app.secret_key = b'aipsterKeyWuh'
@@ -47,10 +48,11 @@ def register():
 
     if request.method == 'POST':
         username = (request.form.get('name') or '').strip()
+
         if any(u.lower() == username.lower() for u in currentPlayers):
             flash('Username already taken. Please choose another.', 'error')
             # Either re-render the form:
-            return render_template('register.css', username=username), 409
+            return render_template('register.html', username=username), 409
         
         # todo: check if user is already registered so you can not register 2 times with different usernames
 

@@ -8,50 +8,64 @@
     <script type="module" src="{{ url_for('flip7LobbyBp.static', filename='js/flip7Lobby.js') }}" defer></script>
     <link rel="stylesheet" href="{{ url_for('flip7LobbyBp.static', filename='css/flip7Lobby.css') }}">
     <script>
-    window.socket = io(); // global
+        window.socket = io(); // global
 
-    window.socket.on('connect', () => console.log('connected as', window.socket.id));
+        window.socket.on('connect', () => console.log('connected as', window.socket.id));
 
-    window.socket.on('redirect', ({ url }) => {
-        console.log('redirect to', url);
-        window.location.href = url;
-    });
+        window.socket.on('redirect', ({ url }) => {
+            console.log('redirect to', url);
+            window.location.href = url;
+        });
 
-    function joinLobby(lobbyId) {
-        window.socket.emit('join_lobby', { lobbyId });
-    }
+        function joinLobby(lobbyId) {
+            window.socket.emit('join_lobby', { lobbyId });
+        }
     </script>
-
-
-        
 </head>
 <body>
-    <h1 class="header">flipSeven MainLobby</h1>
+<div class="content">
+    <!-- 1. Überschrift -->
+    <div class="header-container">
+        <img src="{{ url_for('flip7LobbyBp.static', filename='assets/images/7FlipLogoWordLobby.png') }}" alt="Logo" class="header-logo">
+        <!--  <h1 class="header">MainLobby</h1>  -->
+    </div>
 
+    <!-- 2. Host Button -->
+    <div class="host-container">
+        <a href="/lobby/flip7/create">
+            <button class="ready-button">Hosten</button>
+        </a>
+    </div>
+
+    <!-- 3. Liste der Lobbies -->
     <div class="lobby-container">
-        <!-- Hosten Button -->
-        <div class="host-box">
-            <a href="/lobby/flip7/create"><button class="ready-button" >Hosten</button></a>
-        </div>
-
-        <!-- Lobby Liste -->
-         {% for lobby in openFlip7Lobbies %}
+        {% for lobby in openFlip7Lobbies %}
         <div class="lobby-list">
             <div class="lobby-row">
                 <span class="lobby-name">{{ lobby.name }}</span>
             </div>
             <div class="lobby-row">
-
-            <button type="button" onclick="joinLobby('{{ lobby.id }}')">Beitreten</button>
+                Host: {{ lobby.host }}
+            </div>
+            <div class="lobby-row"> <!-- Mitspieler einblenden -->
+                {% for player in lobby.players %}
+                    {{ player }}<br>
+                {% endfor %}
+            </div>
+            <div class="lobby-row">
+                <button type="button" onclick="joinLobby('{{ lobby.id }}')">Beitreten</button>
+            </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 
-   
-<a href="{{ url_for('mainLobbyBp.lobby') }}">
-            <div class="back-container">
-        <button class="back-button">Zurück</button>
+    <!-- 4. Footer / Back Button -->
+    <div class="footer-container">
+        <a href="{{ url_for('mainLobbyBp.lobby') }}">
+            <button class="back-button">Zurück</button>
+        </a>
     </div>
-    </a>
+    </div>
+
 </body>
 </html>

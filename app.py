@@ -50,7 +50,7 @@ def register():
         if any(u.lower() == username.lower() for u in currentPlayers):
             flash('Username already taken. Please choose another.', 'error')
             # Either re-render the form:
-            return render_template('register.html', username=username), 409
+            return render_template('register.css', username=username), 409
         
         # todo: check if user is already registered so you can not register 2 times with different usernames
 

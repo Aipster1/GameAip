@@ -1,0 +1,92 @@
+/* Body Hintergrund */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Wrapper um Logo + Formular */
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Bild über dem Formular */
+.form-logo {
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Formular Container */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 30px 40px;
+    background-color: #1e1e1e;
+    border: 2px solid #444;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+/* Labels */
+.form-container label {
+    font-size: 0.95em;
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #e0e0e0;
+}
+
+/* Input Felder */
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    font-size: 1em;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-container input:focus {
+    outline: none;
+    border-color: #888;
+    background-color: #333;
+}
+
+/* Button im Formular */
+.form-container button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background-color: #333;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.form-container button:hover {
+    background-color: #444;
+    border-color: #666;
+}
+
+
+.header-logo{
+        width: 50%; /* gewünschte Breite */
+    height: 50%; /* Höhe automatisch passend */
+}

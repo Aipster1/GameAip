@@ -1,11 +1,18 @@
 <head>
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script type="module" src="{{ url_for('mainLobbyBp.static', filename='js/lobby.js') }}" defer></script>
-
+    <link rel="stylesheet" href="{{ url_for('flip7LobbyBp.static', filename='css/flip7CreateLobby.css') }}">
 </head>
+<div class="form-wrapper">
+  <img src="{{ url_for('flip7LobbyBp.static', filename='assets/images/7FlipLogoWordLobby.png') }}" alt="Logo" class="header-logo">
 
-<form method="post">
-  <input name="name" placeholder="Lobbyname">
-  <input name="max_players" type="number" min="2" max="7" value="7">
-  <button type="submit">create</button>
-</form>
+  <form method="post" class="form-container">
+    <label for="name">Lobbyname:</label>
+    <input id="name" name="name" placeholder="Lobbyname">
+
+    <label for="max_players">Max. Spieler:</label>
+    <input id="max_players" name="max_players" type="number" min="2" max="7" value="7">
+
+    <button type="submit">create</button>
+  </form>
+</div>

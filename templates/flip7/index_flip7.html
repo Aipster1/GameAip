@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <!-- Ansicht für verschiedene Geräte -->
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Kartenspiel - Fächer</title>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flip7/flip7Ingame.css') }}">
+    
+    <script type="module" src="{{ url_for('static', filename='js/flip7/flip7.js') }}"></script>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const socket = io();
+  const GAME_ID = "{{ flip7GameId }}";
+  const MY_USER_ID = "{{ session['user_Id'] }}";
+  const CARD_IMG_BASE = "{{ url_for('static', filename='assets/images/flip7/') }}"; // ends with '/'
+
+  const tableEl = document.getElementById('hands-table');
+
+  socket.on('connect', () => {
+    socket.emit('initialize_deck', { gameId: GAME_ID });
+    socket.emit('join_game_room', { gameId: GAME_ID });
+  });
+
+  // Utility: create/find a player's panel
+  function getOrCreatePlayerPanel(userId, name) {
+    let panel = tableEl.querySelector(`.player-hand[data-user-id="${userId}"]`);
+    if (panel) return panel;
+
+    panel = document.createElement('div');
+    panel.className = 'player-hand';
+    panel.dataset.userId = userId;
+
+    const header = document.createElement('h3');
+    header.className = 'player-name';
+    header.textContent = (userId === MY_USER_ID ? 'You' : name || userId);
+
+    const hand = document.createElement('div');
+    hand.className = 'hand';
+    // orientation: your fanning lib can use this
+    hand.dataset.orientation = (userId === MY_USER_ID) ? 'bottom' : 'top';
+    hand.id = `hand-${userId}`;
+
+    panel.appendChild(header);
+    panel.appendChild(hand);
+    tableEl.appendChild(panel);
+    return panel;
+  }
+
+  function renderHandFor(userId, cards) {
+    const panel = getOrCreatePlayerPanel(userId, userId);
+    const handEl = panel.querySelector('.hand');
+    handEl.innerHTML = '';
+    for (const c of cards || []) {
+      const img = document.createElement('img');
+      img.className = 'card';
+      img.alt = 'Karte';
+      img.src = CARD_IMG_BASE + c.filename; // c is {type, value, filename}
+      handEl.appendChild(img);
+    }
+    if (window.layoutHand) window.layoutHand(handEl);
+  }
+
+  // Initial full table snapshot
+  socket.on('table_state', (data) => {
+    for (const p of data.players || []) {
+      getOrCreatePlayerPanel(p.userId, p.name);
+      renderHandFor(p.userId, p.hand);
+    }
+  });
+
+  // After a draw, replace only that player's hand
+  socket.on('hand_replace', (data) => {
+    renderHandFor(data.userId, data.hand);
+  });
+
+  // Optional: show counts/labels
+  socket.on('player_drew', (data) => {
+    const panel = getOrCreatePlayerPanel(data.userId, data.userId);
+    panel.querySelector('.player-name').textContent =
+      `${data.userId === MY_USER_ID ? 'You' : data.userId} (${data.handCount})`;
+  });
+
+  // Draw button
+  window.deal_card = function () {
+    socket.emit('deal_card', { gameId: GAME_ID }, (ack) => console.log('ack:', ack));
+  };
+});
+</script>
+
+
+</head>
+    <body>
+        <section id="hands-table" class="hands-grid"></section>
+
+        
+        <!-- Mittige Stapel zum Ziehen und Ablegen -->
+        <section class="center-piles">
+            
+            <!-- Ziehstapel: klickbar -->
+            <img id="draw-pile" src="{{ url_for('flip7.static', filename='assets/images/flip7/flipSevenBackground.png') }}" alt="Ziehstapel">
+            
+            <button type="button" onclick="deal_card()">Hit</button>
+            
+            <!-- Ablegestapel: nur Bild -->
+            <img id="discard-pile" src="{{ url_for('flip7.static', filename='assets/images/flip7/flipSevenAblage.png') }}" alt="Ablegestapel">
+        
+        </section>
+
+    </body>
+</html>

@@ -1,0 +1,100 @@
+/* Google Font importieren */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Allgemeiner Body */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #2a2a2a;  /* dunkler Hintergrund */
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif; /* moderne Schriftart */
+}
+
+/* Header bleibt oben */
+.header-container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Content + HostButton mittig */
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+/* Spieler-Kasten */
+.content-container {
+    background-color: #3a3a3a;
+    border-radius: 15px;
+    padding: 20px 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    min-width: 300px;
+    text-align: center;
+}
+
+/* Spieler-Liste */
+.players-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.player-item {
+    padding: 8px 0;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Start-Button */
+.start-container {
+    display: flex;
+    justify-content: center;
+}
+
+.ready-button {
+     background: #555555;
+    color: #ffffff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.ready-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+/* Footer mit fixiertem Zurück-Button */
+.footer-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+
+.back-button {
+    background: #555555;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.back-button:hover {
+    background: #777777;
+    transform: translateY(-1px);
+}

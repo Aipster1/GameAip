@@ -1,0 +1,68 @@
+/* Grundlayout */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* vertikal zentrieren */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Überschrift */
+h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Lobby-Grid zentriert */
+.lobby {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center; /* horizontal zentrieren */
+    align-content: center;   /* vertikal zentrieren innerhalb des Grids */
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Game-Karte */
+.game {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.game:hover {
+    transform: scale(1.05);
+}
+
+.game img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.game-title {
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .lobby {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 500px) {
+    .lobby {
+        grid-template-columns: 1fr;
+    }
+}

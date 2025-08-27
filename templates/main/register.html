@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quizspiel - Join</title>
+    <!-- <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    
+
+    <script type="module" src="{{ url_for('static', filename='js/register.js') }}"></script>-->
+       <link rel="stylesheet" href="{{ url_for('static', filename='css/main/register.css') }}">
+</head>
+<body>
+
+    <!--{% with msgs = get_flashed_messages(with_categories=True) %}
+    {% if msgs %}
+        <ul class="flashes">
+        {% for cat, msg in msgs %}
+            <li class="flash {{ cat }}">{{ msg }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}-->
+
+  <div id="join" class="form-container">
+    <form method="post">
+      <input name="name" class="name-input" placeholder="Name eingeben">
+      <button type="submit" class="big-button">Registrieren</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+/* ------------------------------------------------------------
+   CSS-Variablen: zentrale Konfiguration für Kartengröße
+   ------------------------------------------------------------ */
+:root{
+  --card-width: 150px;   /* Breite einer Karte — an Bildgröße anpassen */
+  --card-height: 225px;  /* Höhe einer Karte */
+}
+
+/* ------------------------------------------------------------
+   Grundlegendes Seitenlayout
+   ------------------------------------------------------------ */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: sans-serif; /* System-Schrift, du kannst beliebige Schrift setzen */
+  background: #333333;     /* dunkler Hintergrund für besseren Kontrast */
+}
+
+/* .table ist der "Tisch" — zentriert den Inhalt vertikal/horizontal */
+.table {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* ------------------------------------------------------------
+   Container für eine Hand
+   ------------------------------------------------------------ */
+.hand {
+  /* width definiert, wieviel Platz die Hand maximal einnimmt */
+  width: 60vw;
+  max-width: 800px;
+
+  /* Höhe wird an Kartenhöhe orientiert */
+  height: calc(var(--card-height) + 20px);
+
+  /* pointer-events: none verhindert, dass der Container Maus-Events blockiert.
+     Die Karten (.card) selbst bekommen pointer-events: auto, damit sie anklickbar sind. */
+  pointer-events: none;
+
+  /* fixed positioniert die Hand relativ zum Viewport (z. B. unten) */
+  position: fixed;
+  bottom: 20px; /* Abstand vom unteren Rand */
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* Display:flex + negativer gap ist eine Möglichkeit, Karten zu überlappen.
+     Hinweis: Die exakte Position der Karten wird per JS via transform gesteuert,
+     das Flex-Layout ist hier eher unterstützend/experimentell. */
+  display: flex;
+  gap: -40px;
+}
+
+/* ------------------------------------------------------------
+   Grundstil der einzelnen Karte (.card)
+   ------------------------------------------------------------ */
+.card {
+  position: absolute;    /* absolute, damit JS translate/rotate korrekt wirkt */
+  left: 50%;             /* Ausgangsanker in der Mitte der Hand */
+  bottom: 0;             /* Karten "stehen" auf der Tischkante */
+  width: var(--card-width);
+  height: var(--card-height);
+
+  /* Drehpunkt standardmäßig unten mittig — sinnvoll für Fächer */
+  transform-origin: 50% 100%;
+
+  /* Animationen: transform animiert sanft */
+  transition: transform 220ms ease, z-index 0ms;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  border-radius: 6px;
+
+  /* Karten sollen pointer-events empfangen (Container nicht) */
+  pointer-events: auto;
+
+  user-select: none;    /* verhindert Textauswahl beim Ziehen/Klicken */
+  touch-action: manipulation; /* bessere Touch-Bedienung */
+}
+
+/* ------------------------------------------------------------
+   CSS Hover (Achtung: überschreibt NICHT Inline-Styles aus JS)
+   ------------------------------------------------------------
+   Hinweis: Wenn du Hover visuell ausschließlich per JS steuerst
+   (wie in flipSevenCards.js) solltest du diese transform-Regel
+   entfernen, weil inline-styles (JS) Vorrang haben.
+*/
+.card:hover {
+    transform: translateY(-40px) scale(1.1);
+    z-index: 10; /* einfache Priorisierung beim Hover */
+}
+
+/* ------------------------------------------------------------
+   Orientation-specific rules
+   Wenn die Hand oben/links/rechts ist, passe origin und Position an
+   ------------------------------------------------------------ */
+.hand[data-orientation="top"] .card {
+  bottom: auto;      /* setze bottom zurück */
+  top: 0;            /* Karten vom oberen Rand aus positionieren */
+  transform-origin: 50% 0%;
+}
+.hand[data-orientation="left"] .card {
+  left: 0;
+  top: 50%;
+  transform-origin: 0% 50%;
+}
+.hand[data-orientation="right"] .card {
+  left: auto;
+  right: 0;
+  top: 50%;
+  transform-origin: 100% 50%;
+}
+
+/* ------------------------------------------------------------
+   Toggle-Button (unten rechts)
+   ------------------------------------------------------------ */
+.toggle-view-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ffcc00;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 10000; /* hoch genug, damit Button über Karten liegt */
+}
+
+/* ------------------------------------------------------------
+   "Gerader Modus" (class .straight auf .hand)
+   Karten werden dann in einer Reihe ohne Rotation dargestellt.
+   !important wird verwendet, um inline-transform / frühere Regeln zu
+   überschreiben — aber !important sollte sparsam genutzt werden.
+   ------------------------------------------------------------ */
+.hand.straight .card {
+    transform: none !important;
+    left: auto;
+    bottom: 0;
+    position: relative;
+    margin-right: 8px;
+}
+
+/* Gleicher Hover-Look für den geraden Modus (falls gewünscht) */
+.hand.straight .card:hover {
+    transform-origin: 50% 100%;
+    transform: translateY(-40px) scale(1.1) !important;
+    z-index: 10;
+}
+
+/* Layout-Anpassung für geraden Modus */
+.hand.straight {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: calc(var(--card-height) + 20px);
+}
+
+        /* Einfaches CSS für die mittigen Stapel */
+        .center-piles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px; /* Abstand zwischen den Stapeln */
+            margin: 40px 0;
+        }
+        #draw-pile, #discard-pile {
+            width: 200px; /* Beispielgröße */
+            height: 280px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            background-color: white;
+            border: none;
+            padding: 0;
+        }
+        #discard-pile {
+            cursor: default;
+        }
+        #draw-pile img, #discard-pile img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+
+
+
+.hands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+.player-hand { padding: 8px; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+.player-name { margin: 0 0 6px; font-size: 0.95rem; opacity: .8; }
+.player-hand .hand { position: relative; min-height: 120px; }

@@ -2,11 +2,11 @@ from secrets import token_hex
 from flask import session
 
 
-# def currentUserId():
-#     if 'user_Id' not in session:
-#         session['user_Id'] = f"user_{token_hex(4)}"
-#         # session.permanent = True
-#     return session['user_Id']
+def currentUserId():
+    if 'uid' not in session:
+        session['uid'] = f"user_{token_hex(4)}"
+        # session.permanent = True
+    return session['uid']
 
 def createGameId(gameType):
 

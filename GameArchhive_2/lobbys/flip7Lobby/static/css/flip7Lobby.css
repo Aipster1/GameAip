@@ -1,0 +1,114 @@
+/* Allgemein */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* genau Bildschirmhöhe */
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+      overflow: auto; /* Scrollbar erscheint nur bei Überlauf */
+
+}
+
+/* Header */
+.header-container {
+    text-align: center;
+    flex: 0 0 auto; /* Höhe automatisch nach Inhalt */
+}
+
+
+/* Host Button */
+.host-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto; /* Höhe automatisch nach Inhalt */
+    padding: 50px;
+}
+
+.header-logo {
+    width: 400px; /* gewünschte Breite */
+    height: auto; /* Höhe automatisch passend */
+    margin-bottom: 10px; /* Abstand zwischen Bild und Überschrift */
+}
+
+/* Lobby Liste */
+.lobby-container {
+    display: flex;
+    flex-wrap: wrap;
+ justify-content: center; /* horizontal */
+   align-content: flex-start;
+    flex: 1 1 auto; /* nimmt verbleibenden Platz ein */
+    overflow-y: auto; /* Scrollbar nur wenn nötig */
+    gap: 10px;
+    padding-top: 40px;
+}
+
+/* Lobby Boxen */
+.lobby-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+    border: 2px solid #444;
+    padding: 8px;
+    background-color: #2a2a2a;
+    border-radius: 6px;
+    width: 150px;
+    min-height: 120px;
+}
+
+.lobby-row {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #333;
+    padding: 4px;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+
+.lobby-name {
+    font-weight: bold;
+}
+
+/* Buttons */
+button, .ready-button, .back-button {
+    cursor: pointer;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    transition: background-color 0.2s;
+}
+
+.ready-button {
+    padding: 12px 24px;
+    font-size: 1.1em;
+}
+
+button, .back-button {
+    padding: 6px 12px;
+}
+
+button:hover, .ready-button:hover, .back-button:hover {
+    background-color: #444;
+}
+
+/* 4. Footer / Back Button */
+.footer-container {
+    display: flex;
+    justify-content: flex-start;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+/* Content div um alle 4 Abschnitte */
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* volle Bildschirmhöhe */
+    gap: 10px; /* optionaler Abstand zwischen Abschnitten */
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script type="module" src="{{ url_for('lobby.static', filename='js/flip7Lobby.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lobby/flip7GameLobby.css') }}">
+</head>
+<body>
+
+    <script>
+        window.socket = io();
+        var lobbyId = "{{ flip7LobbyId }}";
+        window.socket.emit('join_room', { lobbyId: lobbyId });
+
+        window.socket.on('redirect', ({ url }) => {
+            window.location.href = url;
+        });
+
+        function startGame(){
+            var lobbyId = "{{ flip7LobbyId }}";
+            window.socket.emit('start_game', { lobbyId: lobbyId });
+        }
+    </script>
+
+
+
+<div class="header-container">
+      <img src="{{ url_for('static', filename='assets/images/flip7/7FlipLogoWordLobby.png') }}" alt="Logo" class="header-logo">
+
+    </div><div class="main-container">
+    <div class="content-container">
+        <h2>Mitspieler</h2>
+        <ul class="players-list">
+            {% for member in lobby.members %}
+                <li class="player-item">{{ member.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="hostButton-container">
+        {% if lobby.host_Id == session["user_Id"] %}
+            <div class="start-container">
+                <button type="button" class="ready-button" onclick="startGame()">Start Game</button>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+        <div class="footer-container">
+            <a href="{{ url_for('lobby.flip7_main_lobby') }}">
+                <button class="back-button">Zurück</button>
+            </a>
+        </div>
+</body>
+</html>
+
+
+  <!--  <div class="dialog">
+        Inhalt mittig
+        <div class="dialog-content">
+            <img src="{{ url_for('lobby.static', filename='img/logo.png') }}" alt="Logo" class="header-logo">
+
+            <h1 class="header">flipSeven GameLobby</h1>
+
+            <div class="players-container">
+
+            </div>
+
+            {% if lobby.hostId == session["uid"] %}
+            <div class="start-container">
+                <button type="button" class="ready-button" onclick="startGame()">Start Game</button>
+            </div>
+            {% endif %}
+        </div>
+
+         Zurück Button unten links
+        <div class="footer-container">
+            <a href="{{ url_for('lobby.flip7_main_lobby') }}">
+                <button class="back-button">Zurück</button>
+            </a>
+        </div>
+    </div>-->

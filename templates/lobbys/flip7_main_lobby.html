@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script type="module" src="{{ url_for('lobby.static', filename='js/lobby/flip7Lobby.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lobby/flip7GameLobby.css') }}">
+    <script>
+        window.socket = io(); // global
+
+        window.socket.on('connect', () => console.log('connected as', window.socket.id));
+
+        window.socket.on('redirect', ({ url }) => {
+            console.log('redirect to', url);
+            window.location.href = url;
+        });
+
+        function joinLobby(lobbyId) {
+            window.socket.emit('join_lobby', { lobbyId });
+        }
+    </script>
+</head>
+<body>
+<div class="content">
+    <!-- 1. Überschrift -->
+    <div class="header-container">
+        <img src="{{ url_for('static', filename='assets/images/flip7/7FlipLogoWordLobby.png') }}" alt="Logo" class="header-logo">
+        <!--  <h1 class="header">MainLobby</h1>  -->
+    </div>
+
+    <!-- 2. Host Button -->
+    <div class="host-container">
+        <a href="/lobby/flip7/create">
+            <button class="ready-button">Hosten</button>
+        </a>
+    </div>
+
+    <!-- 3. Liste der Lobbies -->
+    <div class="lobby-container">
+        {% for lobby in openFlip7Lobbies %}
+        <div class="lobby-list">
+            <div class="lobby-row">
+                <span class="lobby-name">{{ lobby.name }}</span>
+            </div>
+            <div class="lobby-row">
+                Host: {{ lobby.host }}
+            </div>
+            <div class="lobby-row"> <!-- Mitspieler einblenden -->
+                {% for player in lobby.players %}
+                    {{ player }}<br>
+                {% endfor %}
+            </div>
+            <div class="lobby-row">
+                <button type="button" onclick="joinLobby('{{ lobby.id }}')">Beitreten</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 4. Footer / Back Button -->
+    <div class="footer-container">
+        <a href="{{ url_for('lobby.main_lobby') }}">
+            <button class="back-button">Zurück</button>
+        </a>
+    </div>
+    </div>
+
+</body>
+</html>

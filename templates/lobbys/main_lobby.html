@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/lobby/lobby.css') }}">
+    <title>Lobby</title>
+</head>
+<body>
+
+<h1>Games:</h1>
+
+<div class="lobby">
+    <div class="game">
+        <a href="/lobby/quizgame"><img src="{{ url_for('lobby.static', filename='assets/images/quiz.jpg') }}" alt="Quizgame"></a>
+        <div class="game-title">Quizgame</div>
+    </div>
+    <div class="game">
+        <a href="/lobby/keywords"> <img src="{{ url_for('lobby.static', filename='assets/images/keywords.jpg') }}" alt="Keywords"></a>
+        <div class="game-title">Keywords</div>
+    </div>
+    <div class="game">
+         <a href="/lobby/flip7"> <img src="{{ url_for('lobby.static', filename='assets/images/flip7.jpg') }}"alt="Flip 7"></a>
+
+        <div class="game-title">Flip 7</div>
+    </div>
+    <!-- <div class="game">
+        <gameLogos src="bild4.jpg" alt="Game 4">
+        <div class="game-title">Game 4</div>
+    </div>
+    <div class="game">
+        <gameLogos src="bild5.jpg" alt="Game 5">
+        <div class="game-title">Game 5</div>
+    </div>
+    <div class="game">
+        <gameLogos src="bild6.jpg" alt="Game 6">
+        <div class="game-title">Game 6</div>
+    </div>
+    <div class="game">
+        <gameLogos src="bild7.jpg" alt="Game 7">
+        <div class="game-title">Game 7</div>
+    </div>
+    <div class="game">
+        <gameLogos src="bild8.jpg" alt="Game 8">
+        <div class="game-title">Game 8</div>
+    </div>-->
+</div>
+
+</body>
+</html>

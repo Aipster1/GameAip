@@ -43,23 +43,28 @@ class Flip7Manager:
 
     # --- deal a card to a player ---
     def deal_to(self, player: Flip7Player, game: Flip7Game) -> Flip7Card:
-        deal_card: Flip7Card
-
         if not game.draw_pile.cards and not game.discard_pile.cards:
             return print("Can not deal. No cards on the draw and discard pile.")
         
         elif not game.draw_pile.cards and game.discard_pile.cards:
             self._reshuffle_discard_into_draw()
             
-            deal_card = self._deal_card(game, player)
+            self._deal_card(game, player)
         else:
 
-            deal_card = self._deal_card(game, player)
+            self._deal_card(game, player)
+
+        #todo: emit update
             
-            return deal_card
     
 
     # --- internal classes ---
+    def _player_bust(self, player: Flip7Player, game : Flip7Game):
+        '''Adds the player hand to discard pile and sets status to bust, does NOT clear the hand'''
+        game.discard_pile.extend(player.hand)
+
+        player.status = "bust"
+        
 
     # --- remove card from draw pile ---
     def _remove_card_from_deck(self, game: Flip7Game, card: Flip7Card):
@@ -74,11 +79,40 @@ class Flip7Manager:
             random.shuffle(game.draw_pile.cards)
 
     # --- get card from draw pile, remove it and add it to player hand --- 
-    def _deal_card(self, game : Flip7Game, player):
+    def _deal_card(self, game : Flip7Game, player: Flip7Player):
         '''Deals a card to a player, removes it from the drawpile and adds to player hand'''
-        deal_card = game.draw_pile.cards[0]
-        self._remove_card_from_deck(game=game, card=deal_card)
-        player.hand.append(deal_card)
-        return deal_card
+        card: Flip7Card
+
+        if not player.status == "active":
+            return
+         
+        card = game.draw_pile.cards[0]
+        
+        self._remove_card_from_deck(game=game, card=card)
+
+        if card.type == "number" and card in player.hand:
+            if self._player_has_second_chance(player):
+                self._remove_second_chance(player, game)
+                game.discard_pile.extend([card])
+                return
+
+            player.hand.append(card)
+            self._player_bust(player, game)  
+            return
+        
+        player.hand.append(card)
     
+
+    def _player_has_second_chance(self, player: Flip7Player):
+        for card in player.hand:
+            if card.type == "action" and card.value == "secondChance":
+                return True
+            
+    def _remove_second_chance(self, player: Flip7Player, game: Flip7Game):
+        for card in player.hand:
+            if card.type == "action" and card.value == "secondChance":
+                player.hand.remove(card)
+                game.discard_pile.extend([card])
+
+
 flip7_manager = Flip7Manager()

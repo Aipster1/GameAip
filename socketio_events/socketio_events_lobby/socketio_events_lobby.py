@@ -81,7 +81,7 @@ def initLobbySocketEvents(socketio):
     
         join_room(getGameRoom(gameId))
 
-        playerStorage.create_flip7_player(user_Id=session["user_Id"], sid=request.sid, ip_address=request.remote_addr)
+        playerStorage.create_flip7_player(user_Id=session["user_Id"], sid=request.sid, ip_address=request.remote_addr, status="active")
 
         print("player erstellt:", playerStorage.get(session["user_Id"]))
 

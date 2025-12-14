@@ -17,9 +17,11 @@ def initializeFlip7GameSockets(socketio):
                 "value": card.value,
                 "type": card.type}
 
+
     def serialize_hand(hand):
         return [serialize_card(c) for c in hand]
     
+
     def serialize_player(player):
         # player.user_id, player.name, player.hand (list[Flip7Card])
         return {
@@ -27,6 +29,7 @@ def initializeFlip7GameSockets(socketio):
             "name": getattr(player, "name", str(player.user_id)),
             "hand": [asdict(c) for c in player.hand],
         }
+
 
     def serialize_table(game):
         return {"players": [serialize_player(p) for p in game.players]}
@@ -51,24 +54,18 @@ def initializeFlip7GameSockets(socketio):
         if not game:
             return {"ok": False, "error": "no_such_game"}
 
-        # mutate state
-        flip7_manager.deal_to(playerStorage.get(user_id), game)
-
         # broadcast only that player's new full hand to everyone
         player = playerStorage.get(user_id)
 
-        emit(
-            'hand_replace',
-            {"userId": user_id, "hand": [asdict(c) for c in player.hand]},
-            room=getGameRoom(game_id)
-        )
+        # mutate state
+        flip7_manager.deal_to(player, game)
+        print(player.status)         
+
+        print("current player hand: ", player.hand)
+        emit('hand_replace', {"userId": user_id, "hand": [asdict(c) for c in player.hand]}, room=getGameRoom(game_id))
 
         # (optional) also keep a "public" event
-        emit(
-            'player_drew',
-            {"userId": user_id, "handCount": len(player.hand)},
-            room=getGameRoom(game_id)
-        )
+        emit('player_drew', {"userId": user_id, "handCount": len(player.hand)}, room=getGameRoom(game_id))
 
         return {"ok": True}
 

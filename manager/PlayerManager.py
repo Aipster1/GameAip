@@ -9,9 +9,9 @@ class PlayerStore:
     def __init__(self):
         self._players: Dict[str, Flip7Player] = {}
 
-    def create_flip7_player(self, user_Id: str, sid: str, ip_address:str) -> Flip7Player:
+    def create_flip7_player(self, user_Id: str, sid: str, ip_address:str, status: str) -> Flip7Player:
             
-            player = Flip7Player(user_Id=user_Id, username=user_Id, sid=sid, ip_address=ip_address)
+            player = Flip7Player(user_Id=user_Id, username=user_Id, sid=sid, ip_address=ip_address, status=status)
             self._players[user_Id] = player
             return player
     
